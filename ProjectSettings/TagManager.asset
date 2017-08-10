@@ -8,6 +8,8 @@ TagManager:
   - Rare
   - Epic
   - Legendary
+  - GoldAmount
+  - Singleton
   layers:
   - Default
   - TransparentFX
