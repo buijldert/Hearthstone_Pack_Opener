@@ -16,6 +16,7 @@ public class DoneButton : MonoBehaviour {
 
 	public void Done()
     {
+        
         StartCoroutine(ClosePackDelay());
     }
 

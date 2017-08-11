@@ -15,7 +15,7 @@ public class CollectionPageButtons : MonoBehaviour
     [SerializeField]
     private int _currentPage = 0;
 
-    private Animator _pageAnimator;
+    private RotatePage rotatePage;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class CollectionPageButtons : MonoBehaviour
     {
         if (_currentPage != _pages.Count - 1)
         {
-            _pageAnimator = _pages[_currentPage].GetComponent<Animator>();
-            _pageAnimator.SetBool("IsTurningForward", true);
+            rotatePage = _pages[_currentPage].GetComponent<RotatePage>();
+            rotatePage.FlipPage();
             _currentPage += 1;
             PageChange();
         }
@@ -40,8 +40,8 @@ public class CollectionPageButtons : MonoBehaviour
         if(_currentPage != 0)
         {
             _currentPage -= 1;
-            _pageAnimator = _pages[_currentPage].GetComponent<Animator>();
-            _pageAnimator.SetBool("IsTurningForward", false);
+            rotatePage = _pages[_currentPage].GetComponent<RotatePage>();
+            rotatePage.FlipPageBack();
             PageChange();
         }
     }
@@ -50,7 +50,6 @@ public class CollectionPageButtons : MonoBehaviour
     {
         if (_currentPage < _pages.Count - 1)
         {
-
             _nextButtonAnimator.SetBool("FadeIn", true);
         }
         else

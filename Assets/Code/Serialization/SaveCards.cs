@@ -8,64 +8,61 @@ public class SaveCards : MonoBehaviour
 
     private List<Card> _collectionCards;
 
+    private OpenPack _openPack;
+
 	// Use this for initialization
 	void Start ()
     {
-		if(Serializer.Load<List<Card>>("carddata.sav") != null)
-        {
-            _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
-        }
-        else
+        _openPack = GameObject.Find("Pack").GetComponent<OpenPack>();
+        _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
+        
+        if (_collectionCards == null)
         {
             _collectionCards = new List<Card>();
-            print("made list");
         }
 	}
-	
-	// Update is called once per frame
-	public void Save ()
+	public void Save()
     {
-		foreach(GameObject card in GameObject.Find("Pack").GetComponent<OpenPack>()._activeCards)
+        for (int i = 0; i < _openPack._activeCards.Count; i++)
         {
-            if(_collectionCards.Count > 0)
+            Image cardImage = _openPack._activeCards[i].GetComponent<Image>();
+            if (_collectionCards.Count > 0)
             {
-                for (int i = 0; i < _collectionCards.Count; i++)
+                
+                for (int j = 0; j < _collectionCards.Count; j++)
                 {
-                    if (_collectionCards[i].cardName == card.GetComponent<Image>().sprite.name)
+                    if (cardImage.sprite.name == _collectionCards[j].cardName)
                     {
-                        _collectionCards[i].cardCount += 1;
+                        _collectionCards[j].cardCount++;
                         break;
                     }
-                    else if (i == _collectionCards.Count - 1)
+                    else if (j == _collectionCards.Count - 1)
                     {
-                        Card openedCard = new Card();
-                        openedCard.cardName = card.GetComponent<Image>().sprite.name;
-                        openedCard.cardRarity = card.GetComponent<OnCardClick>().cardRarity;
-                        openedCard.cardCount += 1;
+                        Card openedCard = new Card()
+                        {
+                            cardName = cardImage.sprite.name,
+                            cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>().cardRarity,
+                            cardCount = 1
+                        };
                         _collectionCards.Add(openedCard);
-                        print("added card");
+                        break;
                     }
                 }
             }
             else
             {
-                Card openedCard = new Card();
-                openedCard.cardName = card.GetComponent<Image>().sprite.name;
-                openedCard.cardRarity = card.GetComponent<OnCardClick>().cardRarity;
-                openedCard.cardCount += 1;
+                Card openedCard = new Card()
+                {
+                    cardName = cardImage.sprite.name,
+                    cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>().cardRarity,
+                    cardCount = 1
+                };
                 _collectionCards.Add(openedCard);
-                print("added card");
             }
         }
 
         _collectionCards.Sort(delegate (Card i1, Card i2) { return i1.cardName.CompareTo(i2.cardName); });
 
         Serializer.Save("carddata.sav", _collectionCards);
-    }
-
-    public void Load()
-    {
-        _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
-        print(_collectionCards.Count);
     }
 }

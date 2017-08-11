@@ -547,7 +547,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b0f83fd751b8fb14cbfc720aa8c4ef63, type: 3}
   - {fileID: 21300000, guid: 85de3ed0c6f7e9148a19fc9828d370c5, type: 3}
   - {fileID: 21300000, guid: 687213fc6b93db44c95cd1163f5680a2, type: 3}
-  _collectionCardPrefab: {fileID: 0}
+  _collectionCardGameObjects: []
+  _collectionCardPrefab: {fileID: 1835540664214084, guid: 9bcb15cc31223bf41afaaf7d540c93a5,
+    type: 2}
+  _collectionPagePrefab: {fileID: 1883266105047886, guid: 739191062334f7c40bcd22aa0bb07917,
+    type: 2}
+  _pagesParent: {fileID: 195137305}
 --- !u!1 &195137305
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,15 +578,15 @@ RectTransform:
   m_GameObject: {fileID: 195137305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.1156248, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1672514487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000659}
-  m_SizeDelta: {x: 0, y: -112.01}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &195137307
 MonoBehaviour:

@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 224017189138587304}
   - component: {fileID: 222984891314315998}
   - component: {fileID: 114820804595237426}
-  - component: {fileID: 95429224496663822}
   - component: {fileID: 114776264411418466}
+  - component: {fileID: 114031743197817092}
   m_Layer: 5
   m_Name: CollectionPage
   m_TagString: Untagged
@@ -30,23 +30,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!95 &95429224496663822
-Animator:
-  serializedVersion: 3
+--- !u!114 &114031743197817092
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883266105047886}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 33499e25cf684a14789f3b4bcb006eb5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5883f52bc67e370458aca0969a26d5e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114776264411418466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,17 +53,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 75
+    m_Left: 190
     m_Right: 0
     m_Top: 75
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 250, y: 375}
   m_Spacing: {x: 20, y: 40}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 4
 --- !u!114 &114820804595237426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,15 +103,15 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883266105047886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 82.98, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.74200004, y: 0.87922424}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -73, y: 0}
-  m_Pivot: {x: -0.000000037252903, y: 0.5}
+  m_AnchorMax: {x: 0.70983344, y: 0.87459195}
+  m_AnchoredPosition: {x: 0.0016479492, y: 0.00018310547}
+  m_SizeDelta: {x: -0.001709, y: -0.00048828}
+  m_Pivot: {x: 0.000000046056613, y: 0.5}
