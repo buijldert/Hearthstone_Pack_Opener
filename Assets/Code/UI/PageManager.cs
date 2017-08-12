@@ -50,7 +50,7 @@ public class PageManager : MonoBehaviour
             for (int i = 0; i < _collectionCardGameObjects.Count; i++)
             {
                 _collectionCardGameObjects[i].transform.SetParent(tempPage.transform, false);
-                if ((i + 1) % 8 == 0)
+                if ((i + 1) % 8 == 0 && i != _collectionCardGameObjects.Count -1)
                 {
                     tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
                     tempPage.transform.SetAsFirstSibling();
