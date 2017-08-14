@@ -4,52 +4,24 @@ using System.Collections;
 
 public class SoundButton : MonoBehaviour
 {
-    [SerializeField]private Sprite _mutedSoundImage;
-    [SerializeField]private Sprite _soundImage;
-    [SerializeField]private Image _curentSoundImage;
-
-
-    private SoundMuter _soundMuter;
-	// Use this for initialization
-	void Start()
-	{
-        _soundMuter = GameObject.FindWithTag(Tags.SINGLETONTAG).GetComponent<SoundMuter>();
-        if(_soundMuter.IsSoundActive)
-        {
-            _curentSoundImage.sprite = _soundImage;
-        }
-        else
-        {
-            _curentSoundImage.sprite = _mutedSoundImage;
-        }
-	}
-
-    void Update()
-    {
-        CheckWhichImage();
-    }
-
-    void CheckWhichImage()
-    {
-        if (_soundMuter.IsSoundActive)
-        {
-            _curentSoundImage.sprite = _soundImage;
-        }
-        else
-        {
-            _curentSoundImage.sprite = _mutedSoundImage;
-        }
-    }
+    [SerializeField]
+    private Sprite _mutedSoundImage;
+    [SerializeField]
+    private Sprite _soundImage;
+    [SerializeField]
+    private Image _curentSoundImage;
 
     public void SoundToggle()
     {
-        if (_soundMuter.IsSoundActive)
+        if (_curentSoundImage.sprite == _soundImage)
         {
-            _soundMuter.IsSoundActive = false;
+            _curentSoundImage.sprite = _mutedSoundImage;
+            AudioListener.pause = true;
         }
         else
         {
-            _soundMuter.IsSoundActive = true;
+            _curentSoundImage.sprite = _soundImage;
+            AudioListener.pause = false;
         }
     }
 }

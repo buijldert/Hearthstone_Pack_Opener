@@ -3,17 +3,36 @@ using System.Collections;
 
 public class Singleton : MonoBehaviour
 {
-    public static Singleton instance;
+    private static Singleton s_Instance = null;
 
-    void Awake()
+    public static Singleton instance
     {
-        this.tag = Tags.SINGLETONTAG;
-        if (instance != null && instance != this)
+        get
         {
-            Destroy(this.gameObject);
+            if (s_Instance == null)
+            {
+                s_Instance = FindObjectOfType(typeof(Singleton)) as Singleton;
+            }
+
+            return s_Instance;
         }
 
-        instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        set { }
+    }
+
+    private void Awake()
+    {
+        if (s_Instance != null && s_Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        s_Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void OnApplicationQuit()
+    {
+        s_Instance = null;
     }
 }
