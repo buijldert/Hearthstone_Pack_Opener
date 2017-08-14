@@ -22,11 +22,12 @@ public class PageManager : MonoBehaviour
 
 	void Awake ()
     {
-        _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
+    _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
 
-        if(Serializer.Load<List<Card>>("carddata.sav") != null)
+        List<Card> collectionCards = Serializer.Load<List<Card>>("carddata.sav");
+
+        if(collectionCards != null)
         {
-            List<Card> collectionCards = Serializer.Load<List<Card>>("carddata.sav");
             GameObject tempCard;
             GameObject tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
             _collectionPageButtons._pages.Add(tempPage);
@@ -50,7 +51,7 @@ public class PageManager : MonoBehaviour
             for (int i = 0; i < _collectionCardGameObjects.Count; i++)
             {
                 _collectionCardGameObjects[i].transform.SetParent(tempPage.transform, false);
-                if ((i + 1) % 8 == 0 && i != _collectionCardGameObjects.Count -1)
+                if ((i + 1) % 8 == 0 && i != _collectionCardGameObjects.Count - 1)
                 {
                     tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
                     tempPage.transform.SetAsFirstSibling();

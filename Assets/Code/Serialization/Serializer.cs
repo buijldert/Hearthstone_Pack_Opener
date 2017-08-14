@@ -7,28 +7,29 @@ public class Serializer
 {
     public static void Save<T>(string filename, T data) where T : class
     {
-        using (Stream stream = File.OpenWrite(filename))
+        Debug.Log("Saving...");
+        using (Stream stream = File.OpenWrite(Application.persistentDataPath + "/" + filename))
         {
-            filename = Application.persistentDataPath + @"\Saves\" + filename;
-            Stream fileStream = File.Open(filename, FileMode.Create, FileAccess.Write);
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(stream, data);
-            fileStream.Close();
+            stream.Close();
+            Debug.Log("Saving Succesful");
+            Debug.Log(Application.persistentDataPath + "/" + filename);
         }
     }
 
     public static T Load<T>(string filename) where T : class
     {
-        if (File.Exists(filename))
+        Debug.Log("Loading...");
+        if (File.Exists(Application.persistentDataPath + "/" + filename))
         {
             try
             {
-                using (Stream stream = File.OpenRead(filename))
+                using (Stream stream = File.OpenRead(Application.persistentDataPath + "/" + filename))
                 {
-                    filename = Application.persistentDataPath + @"\Saves\" + filename;
-                    Stream fileStream = File.Open(filename, FileMode.Open, FileAccess.Read);
                     BinaryFormatter formatter = new BinaryFormatter();
-                    fileStream.Close();
+                    Debug.Log("Loading Succesful");
+                    Debug.Log(Application.persistentDataPath + "/" + filename);
                     return formatter.Deserialize(stream) as T;
                 }
             }
