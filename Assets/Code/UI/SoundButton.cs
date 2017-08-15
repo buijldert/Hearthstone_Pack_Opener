@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Serialization;
 
 public class SoundButton : MonoBehaviour
 {
@@ -8,19 +9,20 @@ public class SoundButton : MonoBehaviour
     private Sprite _mutedSoundImage;
     [SerializeField]
     private Sprite _soundImage;
+    [FormerlySerializedAs("_curentSoundImage")]
     [SerializeField]
-    private Image _curentSoundImage;
+    private Image _currentSoundImage;
 
     public void SoundToggle()
     {
-        if (_curentSoundImage.sprite == _soundImage)
+        if (_currentSoundImage.sprite == _soundImage)
         {
-            _curentSoundImage.sprite = _mutedSoundImage;
+            _currentSoundImage.sprite = _mutedSoundImage;
             AudioListener.pause = true;
         }
         else
         {
-            _curentSoundImage.sprite = _soundImage;
+            _currentSoundImage.sprite = _soundImage;
             AudioListener.pause = false;
         }
     }

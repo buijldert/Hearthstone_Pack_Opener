@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class PageManager : MonoBehaviour
 {
     
-    [SerializeField]
-    [FormerlySerializedAs("allCardSprites")]
-    private List<Sprite> _allCardSprites;
+    //[SerializeField]
+    //[FormerlySerializedAs("allCardSprites")]
+    //private List<Sprite> _allCardSprites;
     [SerializeField]
     private List<GameObject> _collectionCardGameObjects = new List<GameObject>();
+    private List<Card> _collectionCards;
     [SerializeField]
     private GameObject _collectionCardPrefab;
     [SerializeField]
@@ -19,34 +20,29 @@ public class PageManager : MonoBehaviour
     private GameObject _pagesParent;
 
     private CollectionPageButtons _collectionPageButtons;
+    private CardData _cardData;
 
 	void Awake ()
     {
-    _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
+        _cardData = GameObject.FindWithTag("CardData").GetComponent<CardData>();
+        _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
 
-        List<Card> collectionCards = Serializer.Load<List<Card>>("carddata.sav");
+        _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
 
-        if(collectionCards != null)
+        GameObject tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
+        _collectionPageButtons._pages.Add(tempPage);
+
+        if (_collectionCards != null)
         {
-            GameObject tempCard;
-            GameObject tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
-            _collectionPageButtons._pages.Add(tempPage);
-
-            for (int i = 0; i < collectionCards.Count; i++)
+            for (int i = 0; i < _collectionCards.Count; i++)
             {
-                for (int j = 0; j < _allCardSprites.Count; j++)
-                {
-                    if (collectionCards[i].cardName == _allCardSprites[j].name)
-                    {
-                        tempCard = Instantiate(_collectionCardPrefab);
-                        tempCard.GetComponent<Image>().sprite = _allCardSprites[j];
-                        tempCard.GetComponentInChildren<Text>().text = "x" + collectionCards[i].cardCount;
-                        _collectionCardGameObjects.Add(tempCard);
-                        break;
-                    }
-                }
-            }
+                RetrieveCards(_collectionCards[i], _cardData._commonCards);
+                RetrieveCards(_collectionCards[i], _cardData._rareCards);
+                RetrieveCards(_collectionCards[i], _cardData._epicCards);
+                RetrieveCards(_collectionCards[i], _cardData._legendaryCards);
 
+            }
+            
 
             for (int i = 0; i < _collectionCardGameObjects.Count; i++)
             {
@@ -57,6 +53,22 @@ public class PageManager : MonoBehaviour
                     tempPage.transform.SetAsFirstSibling();
                     _collectionPageButtons._pages.Add(tempPage);
                 }
+            }
+        }
+    }
+
+    private void RetrieveCards(Card currentCard, List<Sprite> cards)
+    {
+        GameObject tempCard;
+        for (int j = 0; j < cards.Count; j++)
+        {
+            if (currentCard.cardName == cards[j].name)
+            {
+                tempCard = Instantiate(_collectionCardPrefab);
+                tempCard.GetComponent<Image>().sprite = cards[j];
+                tempCard.GetComponentInChildren<Text>().text = "x" + currentCard.cardCount;
+                _collectionCardGameObjects.Add(tempCard);
+                break;
             }
         }
     }

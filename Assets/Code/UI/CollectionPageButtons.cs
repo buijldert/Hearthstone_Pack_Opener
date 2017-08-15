@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectionPageButtons : MonoBehaviour
 {
@@ -17,10 +18,14 @@ public class CollectionPageButtons : MonoBehaviour
 
     private RotatePage rotatePage;
 
+    private bool _isJustStarted = true;
+
     private void Start()
     {
         _nextButtonAnimator = _nextButton.GetComponent<Animator>();
         _previousButtonAnimator = _previousButton.GetComponent<Animator>();
+        _isJustStarted = true;
+        _previousButton.SetActive(false);
         PageChange();
     }
 
@@ -31,6 +36,10 @@ public class CollectionPageButtons : MonoBehaviour
             rotatePage = _pages[_currentPage].GetComponent<RotatePage>();
             rotatePage.FlipPage();
             _currentPage += 1;
+            if(!_previousButton.activeSelf)
+            {
+                _previousButton.SetActive(true);
+            }
             PageChange();
         }
     }
@@ -54,6 +63,7 @@ public class CollectionPageButtons : MonoBehaviour
         }
         else
         {
+            
             _nextButtonAnimator.SetBool("FadeIn", false);
         }
 
@@ -63,6 +73,7 @@ public class CollectionPageButtons : MonoBehaviour
         }
         else
         {
+            
             _previousButtonAnimator.SetBool("FadeIn", false);
         }
     }

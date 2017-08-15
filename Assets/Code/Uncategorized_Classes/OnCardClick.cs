@@ -32,7 +32,7 @@ public class OnCardClick : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _openPack = GameObject.Find("Pack").GetComponent<OpenPack>();
-        _cardData = GameObject.Find("CardData").GetComponent<CardData>();
+        _cardData = GameObject.FindWithTag("CardData").GetComponent<CardData>();
     }
 
     public void CardClick()

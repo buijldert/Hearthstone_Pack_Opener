@@ -36,9 +36,9 @@ public class OpenPack : MonoBehaviour {
     void OpenThePack()
     {
         _cardsBackground.SetActive(true);
+        GameObject card;
         for (int i = 0; i < 5; i++)
         {
-            GameObject card;
             card = Instantiate(_card, _cardSpawnPoints[i].transform.position, _card.transform.rotation) as GameObject;
             card.transform.SetParent(_canvas.transform, false);
             card.transform.position = _cardSpawnPoints[i].transform.position;

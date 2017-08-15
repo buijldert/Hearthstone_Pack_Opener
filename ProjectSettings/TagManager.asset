@@ -10,6 +10,7 @@ TagManager:
   - Legendary
   - GoldAmount
   - Singleton
+  - CardData
   layers:
   - Default
   - TransparentFX

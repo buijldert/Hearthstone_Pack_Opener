@@ -22,12 +22,11 @@ public class Singleton : MonoBehaviour
 
     private void Awake()
     {
-        if (s_Instance != null && s_Instance != this)
-        {
+        if (s_Instance == null)
+            s_Instance = this;
+        else if (s_Instance != this)
             Destroy(gameObject);
-        }
-
-        s_Instance = this;
+        
         DontDestroyOnLoad(gameObject);
     }
 
