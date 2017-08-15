@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class PageManager : MonoBehaviour
 {
-    
-    //[SerializeField]
-    //[FormerlySerializedAs("allCardSprites")]
-    //private List<Sprite> _allCardSprites;
     [SerializeField]
     private List<GameObject> _collectionCardGameObjects = new List<GameObject>();
     private List<Card> _collectionCards;
@@ -40,7 +36,6 @@ public class PageManager : MonoBehaviour
                 RetrieveCards(_collectionCards[i], _cardData._rareCards);
                 RetrieveCards(_collectionCards[i], _cardData._epicCards);
                 RetrieveCards(_collectionCards[i], _cardData._legendaryCards);
-
             }
             
 

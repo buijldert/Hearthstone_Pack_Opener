@@ -23,7 +23,6 @@ public class Serializer
             {
                 using (Stream stream = File.OpenRead(Application.persistentDataPath + "/" + filename))
                 {
-                    Debug.Log(Application.persistentDataPath + "/" + filename);
                     BinaryFormatter formatter = new BinaryFormatter();
                     return formatter.Deserialize(stream) as T;
                 }
