@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour
 {
     private float _loadingTime = .2f;
-
     [SerializeField]
-    private Sprite loadingImage;
+    private Transform _outerCircle;
+
+    [FormerlySerializedAs("loadingImage")]
+    [SerializeField]
+    private Sprite _loadingImage;
 
     public void LoadLevel(string sceneName)
     {
@@ -19,12 +23,13 @@ public class LoadingScreen : MonoBehaviour
     private IEnumerator LoadTheLevel(string sceneName, float begin, float end)
     {
         float elapsedTime = 0f;
-        float yRotation = begin;
-
+        float rotation = begin;
+        _outerCircle.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
         while (elapsedTime < _loadingTime)
         {
-            yRotation = Mathf.Lerp(begin, end, (elapsedTime / _loadingTime));
-            transform.eulerAngles = new Vector3(0f, yRotation, 0f);
+            rotation = Mathf.Lerp(begin, end, (elapsedTime / _loadingTime));
+            transform.eulerAngles = new Vector3(0f, rotation, 0f);
+            _outerCircle.eulerAngles = new Vector3(0f, rotation, 0f);
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
@@ -32,11 +37,18 @@ public class LoadingScreen : MonoBehaviour
         if(end == 90f)
         {
             StartCoroutine(LoadTheLevel(sceneName, 90f, 0f));
-            GetComponent<Image>().sprite = loadingImage;
+            GetComponent<Image>().sprite = _loadingImage;
         }
         else
         {
-            yield return new WaitForSeconds(.25f);
+            elapsedTime = 0f;
+            yield return new WaitForSeconds(0.1f);
+            while(elapsedTime < Random.Range(0.5f, 0.75f))
+            {
+                _outerCircle.transform.Rotate(0, 0, -0.75f);
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
             SceneManager.LoadScene(sceneName);
         }
     }
