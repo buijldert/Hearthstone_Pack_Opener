@@ -13,7 +13,7 @@ public class SaveCards : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        _openPack = GameObject.Find("Pack").GetComponent<OpenPack>();
+        _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
         _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
         
         if (_collectionCards == null)

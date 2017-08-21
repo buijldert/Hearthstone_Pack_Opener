@@ -5,14 +5,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22420190}
-  - 222: {fileID: 22286876}
-  - 114: {fileID: 11432400}
-  - 114: {fileID: 11408696}
-  - 114: {fileID: 11404966}
-  - 114: {fileID: 11468994}
+  - component: {fileID: 22420190}
+  - component: {fileID: 22286876}
+  - component: {fileID: 11432400}
+  - component: {fileID: 11408696}
+  - component: {fileID: 11404966}
   m_Layer: 5
   m_Name: Pack
   m_TagString: Untagged
@@ -31,7 +30,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e69a7a29a474204abb437678597b4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _packReceiver: {fileID: 0}
 --- !u!114 &11408696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,27 +104,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11468994
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ada19d4e2a4334087816f474f28024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _card: {fileID: 115514, guid: a0ef0c07ba55f284b85afdc2ac537d71, type: 2}
-  _canvas: {fileID: 0}
-  _cardSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _cardsBackground: {fileID: 0}
-  _doneButton: {fileID: 0}
 --- !u!222 &22286876
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -142,14 +119,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -270, y: 42}
-  m_SizeDelta: {x: 120, y: 165}
+  m_SizeDelta: {x: 100, y: 143}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:

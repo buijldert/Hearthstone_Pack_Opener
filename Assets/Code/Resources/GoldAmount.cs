@@ -4,7 +4,7 @@ using System.Collections;
 public class GoldAmount : MonoBehaviour {
 
     private int _maxGold = 99999999;
-    private int _gold = 500;
+    private int _gold = 50000;
     public int Gold
     {
         get 

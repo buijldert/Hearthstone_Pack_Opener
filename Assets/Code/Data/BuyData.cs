@@ -6,4 +6,5 @@ public class BuyData : MonoBehaviour
 {
     public static int numberOfPacks;
     public static Pack.Expansion packExpansion = Pack.Expansion.Classic;
+    public static int cost;
 }

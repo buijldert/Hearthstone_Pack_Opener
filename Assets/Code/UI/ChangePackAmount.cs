@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangePackAmount : MonoBehaviour {
+public class ChangePackAmount : MonoBehaviour
+{
+    [SerializeField]
+    private int amount;
+    [SerializeField]
+    private int cost;
 
-	public void ChangeAmount(int amount)
+	public void ChangeAmount()
     {
         BuyData.numberOfPacks = amount;
+        BuyData.cost = cost;
     }
 }
