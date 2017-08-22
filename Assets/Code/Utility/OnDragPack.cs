@@ -2,11 +2,12 @@
 using System.Collections;
 
 public class OnDragPack : MonoBehaviour
-{    
+{
+    public OnDragBeginPack _onDragBeginPack;
     private Transform _packReceiver;
     private Vector2 _beginPos;
     private float _distance;
-    private float _maxDistance = 125;
+    private float _maxDistance = 50f;
 
     public delegate void OpenPackAction();
     public static event OpenPackAction OnOpenPack;
@@ -18,9 +19,16 @@ public class OnDragPack : MonoBehaviour
         _packReceiver = GameObject.Find("PackReceiver").transform;
     }
 
-    public void OnDrag() 
+    private void Update() 
     { 
-        transform.position = Input.mousePosition;
+        if(Input.GetMouseButtonUp(0))
+        {
+            OnStopDrag();
+        }
+        else
+        {
+            transform.position = Input.mousePosition;
+        }
     }
 
     public void OnStopDrag()
@@ -32,11 +40,14 @@ public class OnDragPack : MonoBehaviour
             if(OnOpenPack != null)
             {
                 OnOpenPack();
+                Destroy(gameObject);
             }
         }
         else
         {
-            ReturnToBeginPosition();
+            _onDragBeginPack.AddPack();
+            Destroy(gameObject);
+            ///ReturnToBeginPosition();
         }
     }
 
