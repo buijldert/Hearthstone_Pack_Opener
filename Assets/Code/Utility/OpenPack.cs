@@ -33,7 +33,7 @@ public class OpenPack : MonoBehaviour {
         OnCardClick.OnClickCard += AddRevealedCard;
 	}
 
-    void OpenThePack()
+    void OpenThePack(Pack.Expansion expansion)
     {
         _cardsBackground.SetActive(true);
         GameObject card;

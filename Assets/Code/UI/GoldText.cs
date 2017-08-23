@@ -22,6 +22,6 @@ public class GoldText : MonoBehaviour {
 
     void UpdateGoldText()
     {
-        _goldText.text = _goldAmount.Gold.ToString();
+        _goldText.text = _goldAmount._gold.ToString();
     }
 }

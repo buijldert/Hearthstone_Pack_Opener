@@ -893,8 +893,8 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Elasticity: 0
+  m_Inertia: 0
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 10
   m_Viewport: {fileID: 748347224}
@@ -1052,10 +1052,10 @@ RectTransform:
   m_Father: {fileID: 593249957}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 114, y: -17}
-  m_SizeDelta: {x: 120, y: 165}
+  m_AnchorMin: {x: 0.56750005, y: 0.2758968}
+  m_AnchorMax: {x: 0.7187501, y: 0.6443238}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &861800741
 CanvasRenderer:
@@ -1910,7 +1910,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1412941848321484, guid: 5eef80e7b651e574ba7eea1d79fb0a8b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5eef80e7b651e574ba7eea1d79fb0a8b, type: 2}
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 2049839566}
   - component: {fileID: 2049839565}
   m_Layer: 0
-  m_Name: LoadPacks
+  m_Name: PackManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

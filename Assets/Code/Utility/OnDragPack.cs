@@ -4,18 +4,18 @@ using System.Collections;
 public class OnDragPack : MonoBehaviour
 {
     public OnDragBeginPack _onDragBeginPack;
+
+    public Pack.Expansion _packExpansion;
+
     private Transform _packReceiver;
-    private Vector2 _beginPos;
     private float _distance;
     private float _maxDistance = 50f;
 
-    public delegate void OpenPackAction();
+    public delegate void OpenPackAction(Pack.Expansion packExpansion);
     public static event OpenPackAction OnOpenPack;
 
     void Start()
     {
-        _beginPos = transform.position;
-        OpenPack.OnReturnPack += ReturnToBeginPosition;
         _packReceiver = GameObject.Find("PackReceiver").transform;
     }
 
@@ -39,7 +39,8 @@ public class OnDragPack : MonoBehaviour
             transform.position = _packReceiver.transform.position;
             if(OnOpenPack != null)
             {
-                OnOpenPack();
+                OnOpenPack(_onDragBeginPack._packExpansion);
+                
                 Destroy(gameObject);
             }
         }
@@ -49,15 +50,5 @@ public class OnDragPack : MonoBehaviour
             Destroy(gameObject);
             ///ReturnToBeginPosition();
         }
-    }
-
-    void ReturnToBeginPosition()
-    {
-        transform.position = _beginPos;
-    }
-
-    void OnDisable()
-    {
-        OpenPack.OnReturnPack -= ReturnToBeginPosition;
     }
 }

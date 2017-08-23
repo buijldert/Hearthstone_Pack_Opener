@@ -1,34 +1,46 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GoldAmount : MonoBehaviour {
 
     private int _maxGold = 99999999;
-    private int _gold = 50000;
-    public int Gold
+    public int _gold = 0;
+    private Gold _goldData;
+
+    private void Awake()
     {
-        get 
+        _goldData = Serializer.Load<Gold>("golddata.sav");
+        if(_goldData == null)
         {
-            return _gold;
+            _gold = 500;
+
+            _goldData = new Gold
+            {
+                goldAmount = _gold
+            };
+
+            Serializer.Save("golddata.sav", _goldData);
+        }
+        else
+        {
+            _gold = _goldData.goldAmount;
         }
 
-        set
-        {
-            _gold = value;
-        }
     }
 
-	// Update is called once per frame
-	void Update () 
+    public void ChangeGold(int goldMutation)
     {
-        GoldControl();
-	}
+        _gold += goldMutation;
 
-    void GoldControl()
-    {
         if(_gold > _maxGold)
         {
             _gold = _maxGold;
         }
+        else if(_gold < 0)
+        {
+            _gold = 0;
+        }
+
+        _goldData.goldAmount = _gold;
+        Serializer.Save("golddata.sav", _goldData);
     }
 }
