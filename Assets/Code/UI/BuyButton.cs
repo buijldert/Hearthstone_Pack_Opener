@@ -67,13 +67,11 @@ public class BuyButton : MonoBehaviour
             Serializer.Save("packdata.sav", _collectionPacks);
             _purchaseScreen.sprite = _purchaseSuccesfulSprite;
             _purchaseScreenBG.SetActive(true);
-            //show purchase succesful screen
         }
         else
         {
             _purchaseScreen.sprite = _purchaseFailedSprite;
             _purchaseScreenBG.SetActive(true);
-            //show purchase failed screen
         }
     }
 }

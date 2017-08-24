@@ -5,15 +5,15 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 22478564}
-  - 222: {fileID: 22285548}
-  - 114: {fileID: 11464126}
-  - 114: {fileID: 11453114}
-  - 114: {fileID: 11450240}
-  - 82: {fileID: 8269838}
-  - 95: {fileID: 95000011390392178}
+  - component: {fileID: 22478564}
+  - component: {fileID: 22285548}
+  - component: {fileID: 11464126}
+  - component: {fileID: 11453114}
+  - component: {fileID: 11450240}
+  - component: {fileID: 8269838}
+  - component: {fileID: 95000011390392178}
   m_Layer: 5
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -37,6 +37,7 @@ AudioSource:
   Loop: 0
   Mute: 0
   Spatialize: 0
+  SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -49,12 +50,14 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 0
       inSlope: 0
       outSlope: 0
@@ -65,7 +68,8 @@ AudioSource:
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -76,7 +80,8 @@ AudioSource:
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -87,7 +92,8 @@ AudioSource:
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
@@ -136,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fd46755b41bba47b1cc6f321875a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardRarity: 0
   _turnOverSounds:
   - {fileID: 8300000, guid: 8b2a3d09082e6534d9f0d26172c382b3, type: 3}
   - {fileID: 8300000, guid: de074751069f7914fa05eeecae7dd853, type: 3}
@@ -183,14 +190,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 5, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 5, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 9, y: -11.485016}
-  m_SizeDelta: {x: 112.9, y: 176.03}
+  m_SizeDelta: {x: 160, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -49,6 +50,7 @@ public class LoadingScreen : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+            //GameObject.Find("EventSystem").GetComponent<EventSystem>().enabled = true;
             SceneManager.LoadScene(sceneName);
         }
     }

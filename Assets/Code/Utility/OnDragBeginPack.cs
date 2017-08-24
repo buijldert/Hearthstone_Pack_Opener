@@ -9,11 +9,15 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
     [SerializeField]
     private GameObject _packPrefab;
     [SerializeField]
+    private GameObject _counterGameObject;
+
+    [SerializeField]
     private Transform _canvasParent;
 
     public Pack.Expansion _packExpansion;
 
     private Image _packImage;
+    private Text _counterText;
 
     public int _packCount;
 
@@ -21,12 +25,13 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
 
     private void Start()
     {
+        _counterText = GetComponentInChildren<Text>();
+        _counterGameObject = _counterText.transform.parent.gameObject;
         _packImage = GetComponent<Image>();
+        ChangePackText();
         if(_packCount <= 0)
         {
-            Color32 imageColor = _packImage.color;
-            imageColor.a = 30;
-            _packImage.color = imageColor;
+            ChangePackVisuals(30);
             _isPackEnabled = false;
         }
     }
@@ -39,11 +44,10 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
             pack.GetComponent<Image>().sprite = _packImage.sprite;
             pack.GetComponent<OnDragPack>()._onDragBeginPack = this;
             _packCount -= 1;
+            ChangePackText();
             if (_packCount <= 0)
             {
-                Color32 imageColor = _packImage.color;
-                imageColor.a = 30;
-                _packImage.color = imageColor;
+                ChangePackVisuals(30);
                 _isPackEnabled = false;
             }
         }
@@ -52,9 +56,28 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
     public void AddPack()
     {
         _packCount += 1;
-        Color32 imageColor = _packImage.color;
-        imageColor.a = 255;
-        _packImage.color = imageColor;
+        ChangePackVisuals(255);
         _isPackEnabled = true;
+    }
+
+    private void ChangePackVisuals(byte alpha)
+    {
+        Color32 imageColor = _packImage.color;
+        imageColor.a = alpha;
+        _packImage.color = imageColor;
+        ChangePackText();
+    }
+
+    private void ChangePackText()
+    {
+        _counterText.text = _packCount.ToString();
+        if (_packCount < 2)
+        {
+            _counterGameObject.SetActive(false);
+        }
+        else
+        {
+            _counterGameObject.SetActive(true);
+        }
     }
 }
