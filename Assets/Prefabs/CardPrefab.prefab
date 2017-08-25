@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fd46755b41bba47b1cc6f321875a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardRarity: 0
+  _packExpansion: 0
+  _cardRarity: 0
   _turnOverSounds:
   - {fileID: 8300000, guid: 8b2a3d09082e6534d9f0d26172c382b3, type: 3}
   - {fileID: 8300000, guid: de074751069f7914fa05eeecae7dd853, type: 3}
@@ -197,7 +198,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 9, y: -11.485016}
-  m_SizeDelta: {x: 160, y: 250}
+  m_SizeDelta: {x: 170, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000
 Prefab:

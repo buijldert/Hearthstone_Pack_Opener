@@ -16,11 +16,11 @@ public class PageManager : MonoBehaviour
     private GameObject _pagesParent;
 
     private CollectionPageButtons _collectionPageButtons;
-    private CardData _cardData;
+    private CardData[] _cardDataArray;
 
 	void Awake ()
     {
-        _cardData = GameObject.FindWithTag("CardData").GetComponent<CardData>();
+        _cardDataArray = GameObject.FindWithTag("CardData").GetComponents<CardData>();
         _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
 
         _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
@@ -32,10 +32,10 @@ public class PageManager : MonoBehaviour
         {
             for (int i = 0; i < _collectionCards.Count; i++)
             {
-                RetrieveCards(_collectionCards[i], _cardData._commonCards);
-                RetrieveCards(_collectionCards[i], _cardData._rareCards);
-                RetrieveCards(_collectionCards[i], _cardData._epicCards);
-                RetrieveCards(_collectionCards[i], _cardData._legendaryCards);
+                for (int j = 0; j < _cardDataArray.Length; j++)
+                {
+                    RetrieveAllRarities(_collectionCards[i], j);
+                }
             }
             
 
@@ -50,6 +50,14 @@ public class PageManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void RetrieveAllRarities(Card currentCard, int currentExpansion)
+    {
+        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._commonCards);
+        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._rareCards);
+        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._epicCards);
+        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._legendaryCards);
     }
 
     private void RetrieveCards(Card currentCard, List<Sprite> cards)

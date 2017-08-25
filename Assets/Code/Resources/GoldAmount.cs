@@ -11,7 +11,7 @@ public class GoldAmount : MonoBehaviour {
         _goldData = Serializer.Load<Gold>("golddata.sav");
         if(_goldData == null)
         {
-            _gold = 500;
+            _gold = 1000;
 
             _goldData = new Gold
             {

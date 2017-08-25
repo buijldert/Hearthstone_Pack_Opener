@@ -41,7 +41,7 @@ public class SaveCards : MonoBehaviour
                         Card openedCard = new Card()
                         {
                             cardName = cardImage.sprite.name,
-                            cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>().cardRarity,
+                            cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity,
                             cardCount = 1
                         };
                         _collectionCards.Add(openedCard);
@@ -54,7 +54,7 @@ public class SaveCards : MonoBehaviour
                 Card openedCard = new Card()
                 {
                     cardName = cardImage.sprite.name,
-                    cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>().cardRarity,
+                    cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity,
                     cardCount = 1
                 };
                 _collectionCards.Add(openedCard);

@@ -21,6 +21,7 @@ public class OpenPack : MonoBehaviour {
     }
 
     public List<GameObject> _activeCards = new List<GameObject>();
+    public CardData[] _cardDataArray; 
     
     public delegate void ReturnPackAction();
     public static event ReturnPackAction OnReturnPack;
@@ -31,6 +32,8 @@ public class OpenPack : MonoBehaviour {
         OnDragPack.OnOpenPack += OpenThePack;
         DoneButton.OnClosePack += RemoveCards;
         OnCardClick.OnClickCard += AddRevealedCard;
+
+        _cardDataArray = GameObject.Find("CardsDataBase").GetComponents<CardData>(); 
 	}
 
     void OpenThePack(Pack.Expansion expansion)
@@ -42,6 +45,7 @@ public class OpenPack : MonoBehaviour {
             card = Instantiate(_card, _cardSpawnPoints[i].transform.position, _card.transform.rotation) as GameObject;
             card.transform.SetParent(_canvas.transform, false);
             card.transform.position = _cardSpawnPoints[i].transform.position;
+            card.GetComponent<OnCardClick>()._packExpansion = expansion;
             _activeCards.Add(card);
         }
         
