@@ -31,6 +31,18 @@ public class OnCardClick : MonoBehaviour
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
+
+        List<Sprite> cardBackSprites = GameObject.Find("CardBacksDataBase").GetComponent<CardBacksData>()._cardBackSprites;
+        string cardBackName = PlayerPrefs.GetString("CardBackID", "Classic");
+        
+        for (int i = 0; i < cardBackSprites.Count; i++)
+        {
+            if(cardBackSprites[i].name == cardBackName)
+            {
+                GetComponent<Image>().sprite = cardBackSprites[i];
+                break;
+            }
+        }
     }
 
     public void CardClick()
