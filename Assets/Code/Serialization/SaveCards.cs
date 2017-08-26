@@ -21,6 +21,30 @@ public class SaveCards : MonoBehaviour
             _collectionCards = new List<Card>();
         }
 	}
+
+    private void DetermineDustValues(Card card)
+    {
+        switch (card.cardRarity)
+        {
+            case Card.Rarity.Common:
+                card.cardCraftValue = 20;
+                card.cardDisenchantValue = 5;
+                break;
+            case Card.Rarity.Rare:
+                card.cardCraftValue = 100;
+                card.cardDisenchantValue = 20;
+                break;
+            case Card.Rarity.Epic:
+                card.cardCraftValue = 400;
+                card.cardDisenchantValue = 100;
+                break;
+            case Card.Rarity.Legendary:
+                card.cardCraftValue = 1600;
+                card.cardDisenchantValue = 400;
+                break;
+        }
+    }
+
 	public void Save()
     {
         for (int i = 0; i < _openPack._activeCards.Count; i++)
@@ -42,8 +66,12 @@ public class SaveCards : MonoBehaviour
                         {
                             cardName = cardImage.sprite.name,
                             cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity,
-                            cardCount = 1
+                            cardCount = 1,
                         };
+                        DetermineDustValues(openedCard);
+                        Debug.Log("Rarity: " + openedCard.cardRarity);
+                        Debug.Log("Craft value: " + openedCard.cardCraftValue);
+                        Debug.Log("Disenchant value: " + openedCard.cardDisenchantValue);
                         _collectionCards.Add(openedCard);
                         break;
                     }
