@@ -86,6 +86,7 @@ public class OnCardClick : MonoBehaviour
                 else
                 {
                     DetermineDrop();
+                    _commonCards = 0;
                     break;
                 }
             }
