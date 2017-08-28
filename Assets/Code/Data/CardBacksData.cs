@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CardBacksData : MonoBehaviour {
-
+//Holds a list of all sprites representing the cardbacks.
+public class CardBacksData : MonoBehaviour
+{
+    //The list of all sprites.
     public List<Sprite> _cardBackSprites;
 }

@@ -9,10 +9,15 @@ public class OnDragPack : MonoBehaviour
 
     private Transform _packReceiver;
     private float _distance;
-    private float _maxDistance = 50f;
+    private float _maxDistance = 5f;
 
     public delegate void OpenPackAction(Pack.Expansion packExpansion);
     public static event OpenPackAction OnOpenPack;
+
+    private bool _isOpeningPack = false;
+
+    [SerializeField]
+    private GameObject _packOpenExplosion;
 
     void Start()
     {
@@ -20,35 +25,52 @@ public class OnDragPack : MonoBehaviour
     }
 
     private void Update() 
-    { 
-        if(Input.GetMouseButtonUp(0))
+    {
+        if (_isOpeningPack == false)
         {
-            OnStopDrag();
-        }
-        else
-        {
-            transform.position = Input.mousePosition;
+            if (Input.GetMouseButtonUp(0))
+            {
+                OnStopDrag();
+            }
+            else
+            {
+                transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
+            }
         }
     }
 
     public void OnStopDrag()
     {
-        _distance = Vector3.Distance(transform.position, _packReceiver.position);
-        if(_distance < _maxDistance)
+        if(_isOpeningPack == false)
         {
-            transform.position = _packReceiver.transform.position;
-            if(OnOpenPack != null)
+            _distance = Vector2.Distance(transform.position, _packReceiver.position);
+            if (_distance < _maxDistance)
             {
-                OnOpenPack(_onDragBeginPack._packExpansion);
-                
-                Destroy(gameObject);
+                transform.position = _packReceiver.transform.position;
+                GetComponent<Animator>().enabled = true;
+                _isOpeningPack = true;
+                StartCoroutine(OpenPackDelay());
             }
-        }
-        else
+            else
+            {
+                _onDragBeginPack.AddPack();
+                Destroy(gameObject);
+                ///ReturnToBeginPosition();
+            }
+        } 
+    }
+
+    private IEnumerator OpenPackDelay()
+    {
+        while (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("openPack"))
         {
-            _onDragBeginPack.AddPack();
+            yield return new WaitForEndOfFrame();
+        }
+        if (OnOpenPack != null)
+        {
+            OnOpenPack(_packExpansion);
+            Instantiate(_packOpenExplosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            ///ReturnToBeginPosition();
         }
     }
 }

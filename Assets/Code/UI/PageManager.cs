@@ -1,24 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+//Displays all collection pages after deserializing the cards in the collection.
 public class PageManager : MonoBehaviour
 {
+    //THe collection cards gameobjects.
     [SerializeField]
     private List<GameObject> _collectionCardGameObjects = new List<GameObject>();
+    //The collection cards themselves.
     private List<Card> _collectionCards;
+
+    //The prefab for a card in the collection.
     [SerializeField]
     private GameObject _collectionCardPrefab;
+    //The prefab for a page in the collection.
     [SerializeField]
     private GameObject _collectionPagePrefab;
+    //The parent of the pages.
     [SerializeField]
     private GameObject _pagesParent;
 
+    //An instance of the collectionpagebuttons script to add the pages to its pages list.
     private CollectionPageButtons _collectionPageButtons;
+
+    //An array of carddata (one for every expansion).
     private CardData[] _cardDataArray;
 
-	void Awake ()
+    /// <summary>
+    /// Deserializes all the cards currently in the player's collection, instatiates them and instantiates pages to fit them.
+    /// </summary>
+	private void Awake ()
     {
         _cardDataArray = GameObject.FindWithTag("CardData").GetComponents<CardData>();
         _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
@@ -34,7 +46,7 @@ public class PageManager : MonoBehaviour
             {
                 for (int j = 0; j < _cardDataArray.Length; j++)
                 {
-                    RetrieveAllRarities(_collectionCards[i], j);
+                    CheckAllRarities(_collectionCards[i], j);
                 }
             }
             
@@ -52,15 +64,25 @@ public class PageManager : MonoBehaviour
         }
     }
 
-    private void RetrieveAllRarities(Card currentCard, int currentExpansion)
+    /// <summary>
+    /// Checks the current card against all rarities of the current expansion.
+    /// </summary>
+    /// <param name="currentCard">The current card.</param>
+    /// <param name="currentExpansion">The index of the current expansion</param>
+    private void CheckAllRarities(Card currentCard, int currentExpansion)
     {
-        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._commonCards);
-        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._rareCards);
-        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._epicCards);
-        RetrieveCards(currentCard, _cardDataArray[currentExpansion]._legendaryCards);
+        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._commonCards);
+        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._rareCards);
+        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._epicCards);
+        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._legendaryCards);
     }
 
-    private void RetrieveCards(Card currentCard, List<Sprite> cards)
+    /// <summary>
+    /// Instantiates the current card and sets its sprite and counter.
+    /// </summary>
+    /// <param name="currentCard">The current card.</param>
+    /// <param name="currentExpansion">The index of the current expansion</param>
+    private void SetCurrentCard(Card currentCard, List<Sprite> cards)
     {
         GameObject tempCard;
         for (int j = 0; j < cards.Count; j++)

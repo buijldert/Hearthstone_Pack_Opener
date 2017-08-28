@@ -16,6 +16,7 @@ public class OnCardClick : MonoBehaviour
 
     private float _dropChance = 100f;
     private float _drop;
+    private float _lerpTime = 0.5f;
 
     private int _commonCards = 0;
 
@@ -26,8 +27,11 @@ public class OnCardClick : MonoBehaviour
     public delegate void ClickCardAction();
     public static event ClickCardAction OnClickCard;
 
+    public Vector2 _endPosition;
+
     void Start()
     {
+        StartCoroutine(LerpPosition());
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
@@ -139,5 +143,18 @@ public class OnCardClick : MonoBehaviour
             gameObject.tag = Tags.LEGENDARYTAG;
             _cardRarity = Card.Rarity.Legendary;
         }
+    }
+
+    private IEnumerator LerpPosition()
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < _lerpTime)
+        {
+            transform.position = Vector2.Lerp(transform.position, _endPosition, (elapsedTime/_lerpTime));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = _endPosition;
     }
 }

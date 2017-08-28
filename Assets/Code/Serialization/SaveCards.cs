@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class SaveCards : MonoBehaviour
 {
-
+    //A list of all cards in the collection.
     private List<Card> _collectionCards;
-
+    //An instance of the openpack script for 
     private OpenPack _openPack;
 
 	// Use this for initialization
@@ -62,12 +62,7 @@ public class SaveCards : MonoBehaviour
                     }
                     else if (j == _collectionCards.Count - 1)
                     {
-                        Card openedCard = new Card()
-                        {
-                            cardName = cardImage.sprite.name,
-                            cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity,
-                            cardCount = 1,
-                        };
+                        Card openedCard = NewCard(cardImage, _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity);
                         DetermineDustValues(openedCard);
                         Debug.Log("Rarity: " + openedCard.cardRarity);
                         Debug.Log("Craft value: " + openedCard.cardCraftValue);
@@ -79,12 +74,7 @@ public class SaveCards : MonoBehaviour
             }
             else
             {
-                Card openedCard = new Card()
-                {
-                    cardName = cardImage.sprite.name,
-                    cardRarity = _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity,
-                    cardCount = 1
-                };
+                Card openedCard = NewCard(cardImage, _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity);
                 _collectionCards.Add(openedCard);
             }
         }
@@ -93,4 +83,16 @@ public class SaveCards : MonoBehaviour
 
         Serializer.Save("carddata.sav", _collectionCards);
     }
+
+    private Card NewCard(Image cardImage, Card.Rarity rarity)
+    {
+        Card newCard = new Card()
+        {
+            cardName = cardImage.sprite.name,
+            cardRarity = rarity,
+        };
+        newCard.cardCount += 1;
+        return newCard;
+    }
+
 }

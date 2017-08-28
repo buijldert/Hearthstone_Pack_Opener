@@ -10,6 +10,8 @@ public class OpenPack : MonoBehaviour {
     [SerializeField]private List<GameObject> _cardSpawnPoints;
     [SerializeField]private GameObject _cardsBackground;
     [SerializeField]private GameObject _doneButton;
+    [SerializeField]
+    private Transform _packReceiver;
 
     [SerializeField]private int _cardsRevealed = 0;
     public int CardsRevealed
@@ -42,10 +44,10 @@ public class OpenPack : MonoBehaviour {
         GameObject card;
         for (int i = 0; i < 5; i++)
         {
-            card = Instantiate(_card, _cardSpawnPoints[i].transform.position, _card.transform.rotation) as GameObject;
+            card = Instantiate(_card, _packReceiver.position, _card.transform.rotation) as GameObject;
             card.transform.SetParent(_canvas.transform, false);
-            card.transform.position = _cardSpawnPoints[i].transform.position;
             card.GetComponent<OnCardClick>()._packExpansion = expansion;
+            card.GetComponent<OnCardClick>()._endPosition = _cardSpawnPoints[i].transform.position;
             _activeCards.Add(card);
         }
         

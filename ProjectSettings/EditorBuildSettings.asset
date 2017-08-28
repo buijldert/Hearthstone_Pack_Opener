@@ -18,5 +18,5 @@ EditorBuildSettings:
     path: Assets/Scenes/shop.unity
     guid: d1bf9213a43524148872109934448c02
   - enabled: 1
-    path: Assets/Scenes/quests.unity
+    path: Assets/Scenes/cardbacks.unity
     guid: 318c4ae934b794a4c9e4b86a67ce9464
