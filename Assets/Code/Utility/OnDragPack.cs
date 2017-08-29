@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class OnDragPack : MonoBehaviour
 {
@@ -17,12 +18,17 @@ public class OnDragPack : MonoBehaviour
 
     private bool _isOpeningPack = false;
 
+    private EventSystem _eventSystem;
+
     private ParticleSystemRenderer[] _dragParticles;
 
     void Start()
     {
         _packReceiver = GameObject.Find("PackReceiver").transform;
         _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
+        _eventSystem = EventSystem.current;
+        _eventSystem.enabled = false;
+        ChangeFlowVisibility(1);
     }
 
     private void Update() 
@@ -31,21 +37,23 @@ public class OnDragPack : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
+                _eventSystem.enabled = false;
                 OnStopDrag();
             }
             else
             {
                 transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
-                ChangeFlowVisibility(0);
+                
             }
         }
     }
 
     public void OnStopDrag()
     {
-        if(_isOpeningPack == false)
+        ChangeFlowVisibility(-1);
+        if (_isOpeningPack == false)
         {
-            ChangeFlowVisibility(-1);
+            
             _distance = Vector2.Distance(transform.position, _packReceiver.position);
             if (_distance < _maxDistance)
             {
@@ -56,6 +64,7 @@ public class OnDragPack : MonoBehaviour
             }
             else
             {
+                _eventSystem.enabled = true;
                 _onDragBeginPack.AddPack();
                 Destroy(gameObject);
             }
@@ -66,27 +75,29 @@ public class OnDragPack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        ParticleSystemRenderer packGlow = GameObject.Find("Cell_02").GetComponent<ParticleSystemRenderer>();
-        ParticleSystem packGlowParticleSystem = packGlow.gameObject.GetComponent<ParticleSystem>();
+        //ParticleSystemRenderer packGlow = GameObject.Find("Cell_02").GetComponent<ParticleSystemRenderer>();
+        //ParticleSystem packGlowParticleSystem = packGlow.gameObject.GetComponent<ParticleSystem>();
         
-        packGlow.sortingOrder = 0;
-        packGlowParticleSystem.Play();
+        //packGlow.sortingOrder = 0;
+        //packGlowParticleSystem.Play();
 
         yield return new WaitForSeconds(0.5f);
 
-        packGlow.sortingOrder = -1;
-        packGlowParticleSystem.Pause();
+        //packGlow.sortingOrder = -1;
+        //packGlowParticleSystem.Pause();
 
         if (OnOpenPack != null)
         {
             OnOpenPack(_packExpansion);
-
-            ForkParticleEffect explosionEffect = GameObject.Find("Stylized_Space_Explosion").GetComponent<ForkParticleEffect>();
-            explosionEffect.RestartEffect();
-            explosionEffect.PlayEffect();
-
-            Destroy(gameObject);
         }
+
+        //ForkParticleEffect explosionEffect = GameObject.Find("Stylized_Space_Explosion").GetComponent<ForkParticleEffect>();
+        //RestartEffect();
+        //explosionEffect.PlayEffect();
+
+        _eventSystem.enabled = true;
+
+        Destroy(gameObject);
     }
 
     private void ChangeFlowVisibility(int sortingOrder)
