@@ -22,13 +22,17 @@ public class OnDragPack : MonoBehaviour
 
     private ParticleSystemRenderer[] _dragParticles;
 
+    private ColorLerp _colorLerp;
+
     void Start()
     {
         _packReceiver = GameObject.Find("PackReceiver").transform;
+        _colorLerp = _packReceiver.GetComponent<ColorLerp>();
         _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
         _eventSystem = EventSystem.current;
         _eventSystem.enabled = false;
         ChangeFlowVisibility(1);
+        _colorLerp.ControlLerp(true);
     }
 
     private void Update() 
@@ -51,6 +55,7 @@ public class OnDragPack : MonoBehaviour
     public void OnStopDrag()
     {
         ChangeFlowVisibility(-1);
+        _colorLerp.ControlLerp(false);
         if (_isOpeningPack == false)
         {
             

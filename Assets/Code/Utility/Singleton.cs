@@ -5,7 +5,7 @@ public class Singleton : MonoBehaviour
 {
     private static Singleton s_Instance = null;
 
-    public static Singleton instance
+    public static Singleton Instance
     {
         get
         {
