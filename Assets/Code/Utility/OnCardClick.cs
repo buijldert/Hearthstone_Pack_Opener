@@ -73,8 +73,9 @@ public class OnCardClick : MonoBehaviour
                             _currentSprite = _openPack._cardDataArray[(int)_packExpansion]._rareCards[Random.Range(0, _openPack._cardDataArray[(int)_packExpansion]._rareCards.Count)];
                             _audioSource.clip = _turnOverSounds[1];
                             gameObject.tag = Tags.RARETAG;
+                            break;
                         }
-                        _commonCards = 0;
+                        break;
                     }
                 }
 
@@ -86,7 +87,6 @@ public class OnCardClick : MonoBehaviour
                 else
                 {
                     DetermineDrop();
-                    _commonCards = 0;
                     break;
                 }
             }

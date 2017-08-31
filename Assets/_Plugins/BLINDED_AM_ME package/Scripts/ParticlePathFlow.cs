@@ -57,13 +57,13 @@ namespace BLINDED_AM_ME{
 
 				this.distance = Random.Range(0.0f, 1.0f);
 				this.rotation = Random.Range(0.0f, 360.0f);
-				
-				this.particle.startLifetime = systemRef.startLifetime;
+
+                this.particle.startLifetime = systemRef.startLifetime;
 				this.particle.remainingLifetime = this.particle.startLifetime;
 				this.particle.startColor = systemRef.startColor;
 				this.particle.startSize = systemRef.startSize;
 				this.particle.rotation = systemRef.startRotation;
-			}
+            }
 		}
 
 		public float emissionRate = 25.0f;
@@ -114,7 +114,7 @@ namespace BLINDED_AM_ME{
 
 	#if UNITY_EDITOR
 			if(!Application.isPlaying){
-				_editorTimeDelta = EditorApplication.timeSinceStartup - _editorTimetracker;
+                _editorTimeDelta = EditorApplication.timeSinceStartup - _editorTimetracker;
 				_editorTimetracker = EditorApplication.timeSinceStartup;
 			}
 	#endif
@@ -122,12 +122,13 @@ namespace BLINDED_AM_ME{
 			if(transform.childCount <= 1)
 				return;
 
-			// emision
+			// emission
 			if(_emissionRateTracker <= 0.0f){
 				_emissionRateTracker += 1.0f/emissionRate;
 
 				RenewOneDeadParticle();
 			}
+
 			_emissionRateTracker -= (Application.isPlaying ? Time.deltaTime : (float) _editorTimeDelta);
 
 			// age them
@@ -142,21 +143,21 @@ namespace BLINDED_AM_ME{
 
 			// move them
 			foreach(PathParticleTracker tracker in _particle_trackerArray)
-			if(tracker.particle.remainingLifetime > 0.0f){
+			    if(tracker.particle.remainingLifetime > 0.0f){
 
-				normLifetime = tracker.particle.remainingLifetime/tracker.particle.startLifetime;
-				normLifetime = 1.0f - normLifetime;
+				    normLifetime = tracker.particle.remainingLifetime/tracker.particle.startLifetime;
+				    normLifetime = 1.0f - normLifetime;
 				
-				Rpoint = _path_comp.GetPathPoint(normLifetime * _path_comp.TotalDistance);
+				    Rpoint = _path_comp.GetPathPoint(normLifetime * _path_comp.TotalDistance);
 
-				// rotate around Rpoint.direction
+				    // rotate around Rpoint.direction
 			
-				Rpoint.point += (pathWidth * tracker.distance) * Math_Functions.Rotate_Vector(Rpoint.up, Rpoint.forward, tracker.rotation);
+				    Rpoint.point += (pathWidth * tracker.distance) * Math_Functions.Rotate_Vector(Rpoint.up, Rpoint.forward, tracker.rotation);
 
-				tracker.particle.position = Rpoint.point;
-				tracker.particle.velocity = Rpoint.forward;
+				    tracker.particle.position = Rpoint.point;
+				    tracker.particle.velocity = Rpoint.forward;
 			
-			}
+			    }
 
 			_particle_count = 0;
 
@@ -179,6 +180,5 @@ namespace BLINDED_AM_ME{
 				break;
 			}
 		}
-			
 	}
 }
