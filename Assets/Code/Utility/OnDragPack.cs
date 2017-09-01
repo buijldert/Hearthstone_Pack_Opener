@@ -66,6 +66,7 @@ public class OnDragPack : MonoBehaviour
                 GetComponent<Animator>().enabled = true;
                 _isOpeningPack = true;
                 StartCoroutine(OpenPackDelay());
+                
             }
             else
             {

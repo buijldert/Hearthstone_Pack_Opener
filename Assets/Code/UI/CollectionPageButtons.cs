@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class CollectionPageButtons : MonoBehaviour
 
     private void Start()
     {
+        PoolCollection.OnPoolCollection += PoolPages;
         _nextButtonAnimator = _nextButton.GetComponent<Animator>();
         _previousButtonAnimator = _previousButton.GetComponent<Animator>();
         _isJustStarted = true;
@@ -76,5 +78,24 @@ public class CollectionPageButtons : MonoBehaviour
             
             _previousButtonAnimator.SetBool("FadeIn", false);
         }
+    }
+
+    private void PoolPages()
+    {
+        StartCoroutine(DelayPooling());
+    }
+
+    private IEnumerator DelayPooling()
+    {
+        yield return new WaitForSeconds(0.01f);
+        for (int i = 0; i < _pages.Count; i++)
+        {
+            ObjectPool.Instance.PoolObject(_pages[i]);
+        }
+    }
+
+    private void OnDisable()
+    {
+        PoolCollection.OnPoolCollection -= PoolPages;
     }
 }

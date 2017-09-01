@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class OnCardClick : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class OnCardClick : MonoBehaviour
     
     private OpenPack _openPack;
 
-    [SerializeField]private List<AudioClip> _turnOverSounds;
+    [SerializeField]
+    private List<AudioClip> _turnOverSounds;
 
     private AudioSource _audioSource;
 
@@ -29,12 +31,16 @@ public class OnCardClick : MonoBehaviour
 
     public Vector2 _endPosition;
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(LerpPosition());
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
+        if (SceneManager.GetActiveScene().name == "openpacks")
+        {
+            _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
+        }
+        
 
         List<Sprite> cardBackSprites = GameObject.Find("CardBacksDataBase").GetComponent<CardBacksData>()._cardBackSprites;
         string cardBackName = PlayerPrefs.GetString("CardBackID", "Classic");

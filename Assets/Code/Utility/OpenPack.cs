@@ -44,8 +44,10 @@ public class OpenPack : MonoBehaviour {
         GameObject card;
         for (int i = 0; i < 5; i++)
         {
-            card = Instantiate(_card, _packReceiver.position, _card.transform.rotation) as GameObject;
+            card = ObjectPool.Instance.GetObjectForType("CardPrefab", true);
             card.transform.SetParent(_canvas.transform, false);
+            card.transform.position = _packReceiver.position;
+            card.transform.localScale = Vector3.one;
             card.GetComponent<OnCardClick>()._packExpansion = expansion;
             card.GetComponent<OnCardClick>()._endPosition = _cardSpawnPoints[i].transform.position;
             _activeCards.Add(card);
@@ -62,7 +64,8 @@ public class OpenPack : MonoBehaviour {
     {
         foreach(GameObject card in _activeCards)
         {
-            Destroy(card);
+            card.tag = "Untagged";
+            ObjectPool.Instance.PoolObject(card);
         }
         _activeCards.Clear();
     }

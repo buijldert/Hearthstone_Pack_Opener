@@ -20,6 +20,8 @@ public class PageManager : MonoBehaviour
     //The parent of the pages.
     [SerializeField]
     private GameObject _pagesParent;
+    [SerializeField]
+    private Transform examplePage;
 
     //An instance of the collectionpagebuttons script to add the pages to its pages list.
     private CollectionPageButtons _collectionPageButtons;
@@ -32,12 +34,16 @@ public class PageManager : MonoBehaviour
     /// </summary>
 	private void Awake ()
     {
+        PoolCollection.OnPoolCollection += PoolCards;
         _cardDataArray = GameObject.FindWithTag("CardData").GetComponents<CardData>();
         _collectionPageButtons = gameObject.GetComponent<CollectionPageButtons>();
 
         _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
 
-        GameObject tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
+        GameObject tempPage = ObjectPool.Instance.GetObjectForType("CollectionPage", false);
+        tempPage.transform.SetParent(_pagesParent.transform, false);
+        tempPage.transform.localScale = Vector3.one;
+        tempPage.transform.position = examplePage.position;
         _collectionPageButtons._pages.Add(tempPage);
 
         if (_collectionCards != null)
@@ -49,15 +55,17 @@ public class PageManager : MonoBehaviour
                     CheckAllRarities(_collectionCards[i], j);
                 }
             }
-            
 
             for (int i = 0; i < _collectionCardGameObjects.Count; i++)
             {
                 _collectionCardGameObjects[i].transform.SetParent(tempPage.transform, false);
                 if ((i + 1) % 8 == 0 && i != _collectionCardGameObjects.Count - 1)
                 {
-                    tempPage = Instantiate(_collectionPagePrefab, _pagesParent.transform);
+                    tempPage = ObjectPool.Instance.GetObjectForType("CollectionPage", false);
+                    tempPage.transform.SetParent(_pagesParent.transform, false);
                     tempPage.transform.SetAsFirstSibling();
+                    tempPage.transform.localScale = Vector3.one;
+                    tempPage.transform.position = examplePage.position;
                     _collectionPageButtons._pages.Add(tempPage);
                 }
             }
@@ -89,12 +97,26 @@ public class PageManager : MonoBehaviour
         {
             if (currentCard.cardName == cards[j].name)
             {
-                tempCard = Instantiate(_collectionCardPrefab);
+                tempCard = ObjectPool.Instance.GetObjectForType("CollectionCardPrefab", false);
                 tempCard.GetComponent<Image>().sprite = cards[j];
+                tempCard.transform.localScale = Vector3.one;
                 tempCard.GetComponentInChildren<Text>().text = "x" + currentCard.cardCount;
                 _collectionCardGameObjects.Add(tempCard);
                 break;
             }
         }
+    }
+
+    private void PoolCards()
+    {
+        for (int i = 0; i < _collectionCardGameObjects.Count; i++)
+        {
+            ObjectPool.Instance.PoolObject(_collectionCardGameObjects[i]);
+        }
+    }
+
+    private void OnDisable()
+    {
+        PoolCollection.OnPoolCollection -= PoolCards;
     }
 }
