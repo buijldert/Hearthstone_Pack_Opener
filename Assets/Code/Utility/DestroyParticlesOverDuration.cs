@@ -16,6 +16,10 @@ public class DestroyParticlesOverDuration : MonoBehaviour
     private IEnumerator DestroyOverCount()
     {
         yield return new WaitForSeconds(_particleSystem.main.duration);
+        //if(ObjectPool.Instance.GetObjectForType(gameObject.name, true) != null)
+        //{
+
+        //}
         Destroy(gameObject);
     }
 }

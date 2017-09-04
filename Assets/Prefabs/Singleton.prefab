@@ -601,16 +601,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entries:
   - prefab: {fileID: 1883266105047886, guid: 739191062334f7c40bcd22aa0bb07917, type: 2}
-    count: 0
+    count: 50
     startActive: 1
   - prefab: {fileID: 1835540664214084, guid: 9bcb15cc31223bf41afaaf7d540c93a5, type: 2}
-    count: 0
+    count: 200
     startActive: 1
   - prefab: {fileID: 115514, guid: a0ef0c07ba55f284b85afdc2ac537d71, type: 2}
     count: 5
     startActive: 1
   - prefab: {fileID: 113440, guid: f152406403230a243b4b6ff9c8222a22, type: 2}
-    count: 0
+    count: 5
     startActive: 1
 --- !u!114 &114148565525598540
 MonoBehaviour:

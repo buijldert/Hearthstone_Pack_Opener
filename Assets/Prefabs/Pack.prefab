@@ -33,8 +33,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onDragBeginPack: {fileID: 0}
   _packExpansion: 0
-  _packOpenExplosion: {fileID: 1931728837582410, guid: 10cd5f8f44de97649a8038188c6c96ec,
-    type: 2}
 --- !u!114 &11408696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -79, y: 15}
+  m_AnchoredPosition: {x: -915, y: 135}
   m_SizeDelta: {x: 190, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &100100000

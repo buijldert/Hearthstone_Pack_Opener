@@ -40,7 +40,9 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
     {
         if(_isPackEnabled)
         {
-            GameObject pack = Instantiate(_packPrefab, transform.position, transform.rotation, _canvasParent);
+            GameObject pack = ObjectPool.Instance.GetObjectForType("Pack", true);
+            pack.transform.localScale = Vector3.one;
+            pack.transform.SetParent(_canvasParent, false);
             pack.GetComponent<Image>().sprite = _packImage.sprite;
             pack.GetComponent<OnDragPack>()._onDragBeginPack = this;
             _packCount -= 1;

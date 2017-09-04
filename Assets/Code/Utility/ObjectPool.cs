@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Repository of commonly used prefabs.
@@ -55,6 +55,19 @@ public class ObjectPool : MonoBehaviour
     private void OnEnable()
     {
         Instance = this;
+    }
+
+    public static void Reset()
+    {
+        Array.Clear(Instance.Pool, 0, 0);
+    }
+
+    private void OnDisable()
+    {
+        //Array.Clear(Instance.Pool, 0, 0);
+        //ThePool = Pool;
+        //Pool = null;
+        
     }
 
     // Use this for initialization

@@ -12,6 +12,8 @@ public class OnDragPack : MonoBehaviour
     private Transform _packReceiver;
     private float _distance;
     private float _maxDistance = 5f;
+    private float _startWidth;
+    private float _startHeight;
 
     public delegate void OpenPackAction(Pack.Expansion packExpansion);
     public static event OpenPackAction OnOpenPack;
@@ -24,12 +26,28 @@ public class OnDragPack : MonoBehaviour
 
     private ColorLerp _colorLerp;
 
+    private Animator _animator;
+
+    private RectTransform _rectTransform;
+
     void Start()
     {
+        _rectTransform = GetComponent<RectTransform>();
+        _animator = GetComponent<Animator>();
         _packReceiver = GameObject.Find("PackReceiver").transform;
         _colorLerp = _packReceiver.GetComponent<ColorLerp>();
         _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
         _eventSystem = EventSystem.current;
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(EnableDelay());
+    }
+
+    private IEnumerator EnableDelay()
+    {
+        yield return new WaitForEndOfFrame();
         _eventSystem.enabled = false;
         ChangeFlowVisibility(1);
         _colorLerp.ControlLerp(true);
@@ -47,7 +65,6 @@ public class OnDragPack : MonoBehaviour
             else
             {
                 transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
-                
             }
         }
     }
@@ -63,6 +80,8 @@ public class OnDragPack : MonoBehaviour
             if (_distance < _maxDistance)
             {
                 transform.position = _packReceiver.transform.position;
+                _startWidth = _rectTransform.rect.width;
+                _startHeight = _rectTransform.rect.height;
                 GetComponent<Animator>().enabled = true;
                 _isOpeningPack = true;
                 StartCoroutine(OpenPackDelay());
@@ -72,7 +91,7 @@ public class OnDragPack : MonoBehaviour
             {
                 _eventSystem.enabled = true;
                 _onDragBeginPack.AddPack();
-                Destroy(gameObject);
+                RemovePack();
             }
         } 
     }
@@ -103,7 +122,15 @@ public class OnDragPack : MonoBehaviour
 
         _eventSystem.enabled = true;
 
-        Destroy(gameObject);
+        RemovePack();
+    }
+
+    private void RemovePack()
+    {
+        _animator.enabled = false;
+        _isOpeningPack = false;
+        _rectTransform.sizeDelta = new Vector2(_startWidth, _startHeight);
+        ObjectPool.Instance.PoolObject(gameObject);
     }
 
     private void ChangeFlowVisibility(int sortingOrder)

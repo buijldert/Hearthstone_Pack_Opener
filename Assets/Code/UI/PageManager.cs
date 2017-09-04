@@ -30,7 +30,7 @@ public class PageManager : MonoBehaviour
     private CardData[] _cardDataArray;
 
     /// <summary>
-    /// Deserializes all the cards currently in the player's collection, instatiates them and instantiates pages to fit them.
+    /// Deserializes all the cards currently in the player's collection, instatiates them and gets pages from the objectpool to fit them.
     /// </summary>
 	private void Awake ()
     {
@@ -86,7 +86,7 @@ public class PageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Instantiates the current card and sets its sprite and counter.
+    /// Gets the current card from the objectpool and sets its sprite and counter.
     /// </summary>
     /// <param name="currentCard">The current card.</param>
     /// <param name="currentExpansion">The index of the current expansion</param>
