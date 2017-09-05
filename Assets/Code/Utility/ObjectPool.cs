@@ -52,27 +52,24 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     private GameObject _containerObject;
 
+    private static ObjectPool s_Instance = null;
+
+
     private void OnEnable()
     {
         Instance = this;
     }
 
-    public static void Reset()
-    {
-        Array.Clear(Instance.Pool, 0, 0);
-    }
-
-    private void OnDisable()
-    {
-        //Array.Clear(Instance.Pool, 0, 0);
-        //ThePool = Pool;
-        //Pool = null;
-        
-    }
-
     // Use this for initialization
     private void Awake()
     {
+        if (s_Instance == null)
+            s_Instance = this;
+        else if (s_Instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+
         _containerObject = this.gameObject;
 
         //Loop through the object prefabs and make a new list for each one.
