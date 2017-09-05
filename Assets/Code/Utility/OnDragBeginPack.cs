@@ -14,6 +14,9 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
     [SerializeField]
     private Transform _canvasParent;
 
+    [SerializeField]
+    private Transform _normalParent;
+
     public Pack.Expansion _packExpansion;
 
     private Image _packImage;
@@ -31,7 +34,7 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
         ChangePackText();
         if(_packCount <= 0)
         {
-            ChangePackVisuals(30);
+            ChangePackVisuals(false);
             _isPackEnabled = false;
         }
     }
@@ -49,7 +52,7 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
             ChangePackText();
             if (_packCount <= 0)
             {
-                ChangePackVisuals(30);
+                ChangePackVisuals(false);
                 _isPackEnabled = false;
             }
         }
@@ -58,15 +61,24 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
     public void AddPack()
     {
         _packCount += 1;
-        ChangePackVisuals(255);
+        ChangePackVisuals(true);
         _isPackEnabled = true;
     }
 
-    private void ChangePackVisuals(byte alpha)
+    private void ChangePackVisuals(bool isEnabled)
     {
-        Color32 imageColor = _packImage.color;
-        imageColor.a = alpha;
-        _packImage.color = imageColor;
+        //Color32 imageColor = _packImage.color;
+        //imageColor.a = alpha;
+        //_packImage.color = imageColor;
+        if(isEnabled)
+        {
+            transform.SetParent(_normalParent);
+        }
+        else
+        {
+            transform.SetParent(null);
+        }
+
         ChangePackText();
     }
 

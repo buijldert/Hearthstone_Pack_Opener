@@ -8,12 +8,6 @@ public class DoneButton : MonoBehaviour {
 
     [SerializeField]private GameObject _cardsBackground;
 
-    void Start()
-    {
-        _cardsBackground.SetActive(false);
-        gameObject.SetActive(false);
-    }
-
 	public void Done()
     {
         
@@ -27,7 +21,8 @@ public class DoneButton : MonoBehaviour {
         {
             OnClosePack();
         }
-        _cardsBackground.SetActive(false);
         gameObject.SetActive(false);
+        _cardsBackground.SetActive(false);
+        
     }
 }

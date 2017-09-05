@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 223644829524454168}
   - component: {fileID: 114460456586139460}
   - component: {fileID: 114105427039577474}
+  - component: {fileID: 114723245059685584}
   m_Layer: 5
   m_Name: LoadingAnimationContaner
   m_TagString: Untagged
@@ -64,7 +65,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1746498822894460
 GameObject:
   m_ObjectHideFlags: 1
@@ -100,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114097353193149946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,6 +252,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _beginRotation: 0
   _endRotation: 90
+--- !u!114 &114723245059685584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1412941848321484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2c7148853dbea428fb67c5e29686f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _leftBG: {fileID: 1562477951420648}
+  _rightBG: {fileID: 1935711536882466}
 --- !u!114 &114861723362814956
 MonoBehaviour:
   m_ObjectHideFlags: 1

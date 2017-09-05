@@ -11,7 +11,7 @@ public class OnDragPack : MonoBehaviour
 
     private Transform _packReceiver;
     private float _distance;
-    private float _maxDistance = 5f;
+    private float _maxDistance = 20f;
     private float _startWidth;
     private float _startHeight;
 
@@ -49,6 +49,7 @@ public class OnDragPack : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         _eventSystem.enabled = false;
+        _packExpansion = _onDragBeginPack._packExpansion;
         ChangeFlowVisibility(1);
         _colorLerp.ControlLerp(true);
     }
@@ -64,7 +65,7 @@ public class OnDragPack : MonoBehaviour
             }
             else
             {
-                transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 100f));
+                transform.position = /*Camera.main.ScreenToWorldPoint(*/new Vector3(Input.mousePosition.x, Input.mousePosition.y);//, 5f));
             }
         }
     }
@@ -76,19 +77,22 @@ public class OnDragPack : MonoBehaviour
         if (_isOpeningPack == false)
         {
             
-            _distance = Vector2.Distance(transform.position, _packReceiver.position);
+            _distance = Vector2.Distance(transform.position, Camera.main.WorldToScreenPoint(_packReceiver.position));
             if (_distance < _maxDistance)
             {
-                transform.position = _packReceiver.transform.position;
+                transform.position = Camera.main.WorldToScreenPoint(_packReceiver.position);
                 _startWidth = _rectTransform.rect.width;
                 _startHeight = _rectTransform.rect.height;
+                print(_startHeight);
+                print(_startWidth);
                 GetComponent<Animator>().enabled = true;
                 _isOpeningPack = true;
                 StartCoroutine(OpenPackDelay());
-                
             }
             else
             {
+                _startWidth = _rectTransform.rect.width;
+                _startHeight = _rectTransform.rect.height;
                 _eventSystem.enabled = true;
                 _onDragBeginPack.AddPack();
                 RemovePack();
