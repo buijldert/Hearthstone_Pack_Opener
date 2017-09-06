@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class OnDragPack : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class OnDragPack : MonoBehaviour
 
     private Transform _packReceiver;
     private float _distance;
-    private float _maxDistance = 20f;
+    private float _maxDistance = 150f;
     private float _startWidth;
     private float _startHeight;
 
@@ -20,7 +21,7 @@ public class OnDragPack : MonoBehaviour
 
     private bool _isOpeningPack = false;
 
-    private EventSystem _eventSystem;
+    private GameObject _eventSystem;
 
     private ParticleSystemRenderer[] _dragParticles;
 
@@ -34,10 +35,6 @@ public class OnDragPack : MonoBehaviour
     {
         _rectTransform = GetComponent<RectTransform>();
         _animator = GetComponent<Animator>();
-        _packReceiver = GameObject.Find("PackReceiver").transform;
-        _colorLerp = _packReceiver.GetComponent<ColorLerp>();
-        _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
-        _eventSystem = EventSystem.current;
     }
 
     private void OnEnable()
@@ -48,7 +45,16 @@ public class OnDragPack : MonoBehaviour
     private IEnumerator EnableDelay()
     {
         yield return new WaitForEndOfFrame();
-        _eventSystem.enabled = false;
+        //_eventSystem.enabled = false;
+        if (SceneManager.GetActiveScene().name == "openpacks")
+        {
+            _packReceiver = GameObject.Find("PackReceiver").transform;
+            _colorLerp = _packReceiver.GetComponent<ColorLerp>();
+            _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
+            _eventSystem = GameObject.Find("EventSystem");
+            _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
+            _eventSystem = GameObject.Find("EventSystem");
+        }
         _packExpansion = _onDragBeginPack._packExpansion;
         ChangeFlowVisibility(1);
         _colorLerp.ControlLerp(true);
@@ -60,11 +66,12 @@ public class OnDragPack : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0))
             {
-                _eventSystem.enabled = false;
+                _eventSystem.SetActive(false);
                 OnStopDrag();
             }
             else
             {
+                //print(Vector2.Distance(transform.position, Camera.main.WorldToScreenPoint(_packReceiver.position)));
                 transform.position = /*Camera.main.ScreenToWorldPoint(*/new Vector3(Input.mousePosition.x, Input.mousePosition.y);//, 5f));
             }
         }
@@ -78,22 +85,19 @@ public class OnDragPack : MonoBehaviour
         {
             
             _distance = Vector2.Distance(transform.position, Camera.main.WorldToScreenPoint(_packReceiver.position));
+            _startWidth = _rectTransform.rect.width;
+            _startHeight = _rectTransform.rect.height;
             if (_distance < _maxDistance)
             {
                 transform.position = Camera.main.WorldToScreenPoint(_packReceiver.position);
-                _startWidth = _rectTransform.rect.width;
-                _startHeight = _rectTransform.rect.height;
-                print(_startHeight);
-                print(_startWidth);
+                
                 GetComponent<Animator>().enabled = true;
                 _isOpeningPack = true;
                 StartCoroutine(OpenPackDelay());
             }
             else
             {
-                _startWidth = _rectTransform.rect.width;
-                _startHeight = _rectTransform.rect.height;
-                _eventSystem.enabled = true;
+                _eventSystem.SetActive(true);
                 _onDragBeginPack.AddPack();
                 RemovePack();
             }
@@ -124,7 +128,7 @@ public class OnDragPack : MonoBehaviour
         //RestartEffect();
         //explosionEffect.PlayEffect();
 
-        _eventSystem.enabled = true;
+        _eventSystem.SetActive(true);
 
         RemovePack();
     }

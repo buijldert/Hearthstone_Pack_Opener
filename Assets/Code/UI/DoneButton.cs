@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DoneButton : MonoBehaviour {
-
-    public delegate void ClosePackAction();
-    public static event ClosePackAction OnClosePack;
-
-    [SerializeField]private GameObject _cardsBackground;
+public class DoneButton : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject _cardsBackground;
 
 	public void Done()
     {
@@ -17,10 +15,6 @@ public class DoneButton : MonoBehaviour {
     private IEnumerator ClosePackDelay()
     {
         yield return new WaitForEndOfFrame();
-        if (OnClosePack != null)
-        {
-            OnClosePack();
-        }
         gameObject.SetActive(false);
         _cardsBackground.SetActive(false);
         

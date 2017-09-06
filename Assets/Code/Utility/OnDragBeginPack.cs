@@ -46,6 +46,7 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
             GameObject pack = ObjectPool.Instance.GetObjectForType("Pack", true);
             pack.transform.localScale = Vector3.one;
             pack.transform.SetParent(_canvasParent, false);
+            pack.transform.position = Camera.main.WorldToScreenPoint(transform.position);
             pack.GetComponent<Image>().sprite = _packImage.sprite;
             pack.GetComponent<OnDragPack>()._onDragBeginPack = this;
             _packCount -= 1;
@@ -67,9 +68,6 @@ public class OnDragBeginPack : MonoBehaviour, IPointerDownHandler
 
     private void ChangePackVisuals(bool isEnabled)
     {
-        //Color32 imageColor = _packImage.color;
-        //imageColor.a = alpha;
-        //_packImage.color = imageColor;
         if(isEnabled)
         {
             transform.SetParent(_normalParent);

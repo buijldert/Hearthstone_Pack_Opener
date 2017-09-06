@@ -52,7 +52,11 @@ public class PageManager : MonoBehaviour
             {
                 for (int j = 0; j < _cardDataArray.Length; j++)
                 {
-                    CheckAllRarities(_collectionCards[i], j);
+                    if(_cardDataArray[j]._packExpansion == _collectionCards[i].cardExpansion)
+                    {
+                        CheckAllRarities(_collectionCards[i], j);
+                        break;
+                    }
                 }
             }
 

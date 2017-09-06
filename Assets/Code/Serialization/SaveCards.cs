@@ -11,8 +11,9 @@ public class SaveCards : MonoBehaviour
     private OpenPack _openPack;
 
 	// Use this for initialization
-	void Start ()
+	void OnEnable ()
     {
+        OpenPack.OnCardsDetermined += Save;
         _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
         _collectionCards = Serializer.Load<List<Card>>("carddata.sav");
         
@@ -21,6 +22,11 @@ public class SaveCards : MonoBehaviour
             _collectionCards = new List<Card>();
         }
 	}
+
+    private void OnDisable()
+    {
+        OpenPack.OnCardsDetermined -= Save;
+    }
 
     private void DetermineDustValues(Card card)
     {
@@ -45,24 +51,24 @@ public class SaveCards : MonoBehaviour
         }
     }
 
-	public void Save()
+	private void Save()
     {
+        OnCardClick card;
         for (int i = 0; i < _openPack._activeCards.Count; i++)
         {
-            Image cardImage = _openPack._activeCards[i].GetComponent<Image>();
+            card = _openPack._activeCards[i];
             if (_collectionCards.Count > 0)
             {
-                
                 for (int j = 0; j < _collectionCards.Count; j++)
                 {
-                    if (cardImage.sprite.name == _collectionCards[j].cardName)
+                    if (card._currentSprite.name == _collectionCards[j].cardName)
                     {
                         _collectionCards[j].cardCount++;
                         break;
                     }
                     else if (j == _collectionCards.Count - 1)
                     {
-                        Card openedCard = NewCard(cardImage, _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity);
+                        Card openedCard = NewCard(card);
                         DetermineDustValues(openedCard);
                         Debug.Log("Rarity: " + openedCard.cardRarity);
                         Debug.Log("Craft value: " + openedCard.cardCraftValue);
@@ -74,7 +80,7 @@ public class SaveCards : MonoBehaviour
             }
             else
             {
-                Card openedCard = NewCard(cardImage, _openPack._activeCards[i].GetComponent<OnCardClick>()._cardRarity);
+                Card openedCard = NewCard(card);
                 _collectionCards.Add(openedCard);
             }
         }
@@ -84,12 +90,13 @@ public class SaveCards : MonoBehaviour
         Serializer.Save("carddata.sav", _collectionCards);
     }
 
-    private Card NewCard(Image cardImage, Card.Rarity rarity)
+    private Card NewCard(OnCardClick card)
     {
         Card newCard = new Card()
         {
-            cardName = cardImage.sprite.name,
-            cardRarity = rarity,
+            cardName = card._currentSprite.name,
+            cardRarity = card._cardRarity,
+            cardExpansion = card._packExpansion,
         };
         newCard.cardCount += 1;
         return newCard;
