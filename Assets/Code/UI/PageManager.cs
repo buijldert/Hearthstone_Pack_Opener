@@ -83,10 +83,24 @@ public class PageManager : MonoBehaviour
     /// <param name="currentExpansion">The index of the current expansion</param>
     private void CheckAllRarities(Card currentCard, int currentExpansion)
     {
-        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._commonCards);
-        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._rareCards);
-        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._epicCards);
-        SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._legendaryCards);
+        switch(currentCard.cardRarity)
+        {
+            case Card.Rarity.Common:
+                SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._commonCards);
+                break;
+            case Card.Rarity.Rare:
+                SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._rareCards);
+                break;
+            case Card.Rarity.Epic:
+                SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._epicCards);
+                break;
+            case Card.Rarity.Legendary:
+                SetCurrentCard(currentCard, _cardDataArray[currentExpansion]._legendaryCards);
+                break;
+            default:
+                Debug.LogError("This card has no rarity. Did something go wrong with serialization?");
+                break;
+        }
     }
 
     /// <summary>

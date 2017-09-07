@@ -23,27 +23,4 @@ public class BackButton : MonoBehaviour
             }
         }
     }
-    //private string _previousScene;
-    //private string _currentScene;
-	// Use this for initialization
-    /*void Awake()
-    {
-        if (_currentScene == null)
-        {
-            _currentScene = SceneManager.GetActiveScene().name;
-        }
-    }*
-
-	void OnLevelWasLoaded()
-	{
-        _currentScene = SceneManager.GetActiveScene().name;
-	}*/
-	
-	// Update() is called once per frame
-	
-
-    /*public void OnExitScene()
-    {
-        _previousScene = _currentScene;
-    }*/
 }

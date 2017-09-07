@@ -58,7 +58,7 @@ public class OpenPack : MonoBehaviour {
         {
             DetermineDrop();
 
-            if(i == 3)
+            if(i == 4)
             {
                 CommonCheck();
             }

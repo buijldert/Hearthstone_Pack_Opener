@@ -31,7 +31,18 @@ public class OnCardClick : MonoBehaviour
 
     public Vector2 _endPosition;
 
-    void OnEnable()
+    [SerializeField]
+    private Image _cardImage;
+
+#region LONGPRESS
+    public float durationThreshold = 0.25f;
+
+    private bool isPointerDown = false;
+    private bool longPressTriggered = false;
+    private float timePressStarted;
+#endregion
+
+    private void OnEnable()
     {
         StartCoroutine(LerpPosition());
         _animator = GetComponent<Animator>();
@@ -40,24 +51,49 @@ public class OnCardClick : MonoBehaviour
         {
             _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
         }
-        
 
-        List<Sprite> cardBackSprites = GameObject.Find("CardBacksDataBase").GetComponent<CardBacksData>()._cardBackSprites;
-        string cardBackName = PlayerPrefs.GetString("CardBackID", "Classic");
-        
-        for (int i = 0; i < cardBackSprites.Count; i++)
+        _cardImage.sprite = GameObject.Find("CardBacksDataBase").GetComponent<CardBacksData>()._cardBackSprites[PlayerPrefs.GetInt("CardBackID", 4)];
+    }
+
+    private void Update()
+    {
+        if (isPointerDown && !longPressTriggered)
         {
-            if(cardBackSprites[i].name == cardBackName)
+            if (Time.time - timePressStarted > durationThreshold)
             {
-                GetComponent<Image>().sprite = cardBackSprites[i];
-                break;
+                CardHold();
             }
         }
     }
 
+    public void PointerDown()
+    {
+        timePressStarted = Time.time;
+        isPointerDown = true;
+        longPressTriggered = false;
+    }
+
+    public void PointerUp()
+    {
+        isPointerDown = false;
+        CardClick();
+    }
+
     public void CardClick()
     {
-        _animator.SetBool("isClicked", true);
+        if(longPressTriggered == false)
+        {
+            _animator.SetBool("isClicked", true);
+        }
+       
+    }
+
+    public void CardHold()
+    {
+        longPressTriggered = true;
+        GameObject.Find("CardGlow").transform.position = transform.position;
+        GameObject.Find("CardGlow").GetComponent<ColorLerp>().startColor = Color.blue;
+        GameObject.Find("CardGlow").GetComponent<ColorLerp>().endColor = Color.cyan;
     }
 
     public void SetCardSprite()
@@ -69,7 +105,7 @@ public class OnCardClick : MonoBehaviour
         _audioSource.clip = _turnOverSound;
         _audioSource.Play();
 
-        GetComponent<Image>().sprite = _currentSprite;
+        _cardImage.sprite = _currentSprite;
     }
 
     

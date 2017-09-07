@@ -6,6 +6,8 @@ public class CardBackID : MonoBehaviour
 {
 	public void ChangeCardBackID()
     {
-        PlayerPrefs.SetString("CardBackID", EventSystem.current.currentSelectedGameObject.GetComponent<Image>().sprite.name);
+        Image currentImage = EventSystem.current.currentSelectedGameObject.GetComponent<Image>();
+        int listIndex = GetComponent<SetCardBacks>()._cardBackImages.FindIndex(a => a == currentImage);
+        PlayerPrefs.SetInt("CardBackID", listIndex);
     }
 }

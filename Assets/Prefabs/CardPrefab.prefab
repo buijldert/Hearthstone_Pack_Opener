@@ -144,11 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _packExpansion: 0
   _cardRarity: 0
-  _turnOverSounds:
-  - {fileID: 8300000, guid: 8b2a3d09082e6534d9f0d26172c382b3, type: 3}
-  - {fileID: 8300000, guid: de074751069f7914fa05eeecae7dd853, type: 3}
-  - {fileID: 8300000, guid: 907a0016d7fcacc4caf4a820dc0823b5, type: 3}
-  - {fileID: 8300000, guid: eb4d1f35cd006604fa4402e5e656316e, type: 3}
+  _turnOverSound: {fileID: 0}
+  _currentSprite: {fileID: 0}
+  _endPosition: {x: 0, y: 0}
+  _cardImage: {fileID: 11464126}
 --- !u!114 &11464126
 MonoBehaviour:
   m_ObjectHideFlags: 1

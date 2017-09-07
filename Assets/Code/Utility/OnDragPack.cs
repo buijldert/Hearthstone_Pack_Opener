@@ -31,6 +31,10 @@ public class OnDragPack : MonoBehaviour
 
     private RectTransform _rectTransform;
 
+    private BackButton _backButton;
+
+    private PackTrail _packTrail;
+
     void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
@@ -39,6 +43,7 @@ public class OnDragPack : MonoBehaviour
 
     private void OnEnable()
     {
+        
         StartCoroutine(EnableDelay());
     }
 
@@ -54,10 +59,15 @@ public class OnDragPack : MonoBehaviour
             _eventSystem = GameObject.Find("EventSystem");
             _dragParticles = GameObject.Find("FlowContainer").GetComponentsInChildren<ParticleSystemRenderer>();
             _eventSystem = GameObject.Find("EventSystem");
+            _backButton = GameObject.FindWithTag(Tags.SINGLETONTAG).GetComponent<BackButton>();
+            _backButton.enabled = false;
+            _packTrail = GameObject.Find("PackTrail").GetComponent<PackTrail>();
         }
         _packExpansion = _onDragBeginPack._packExpansion;
         ChangeFlowVisibility(1);
         _colorLerp.ControlLerp(true);
+        _packTrail.packToFollow = transform;
+        _packTrail.GetComponent<ParticleSystem>().Play();
     }
 
     private void Update() 
@@ -83,7 +93,6 @@ public class OnDragPack : MonoBehaviour
         _colorLerp.ControlLerp(false);
         if (_isOpeningPack == false)
         {
-            
             _distance = Vector2.Distance(transform.position, Camera.main.WorldToScreenPoint(_packReceiver.position));
             _startWidth = _rectTransform.rect.width;
             _startHeight = _rectTransform.rect.height;
@@ -98,9 +107,12 @@ public class OnDragPack : MonoBehaviour
             else
             {
                 _eventSystem.SetActive(true);
+                _backButton.enabled = true;
                 _onDragBeginPack.AddPack();
                 RemovePack();
             }
+            _packTrail.GetComponent<ParticleSystem>().Clear();
+            _packTrail.GetComponent<ParticleSystem>().Pause();
         } 
     }
 
@@ -108,25 +120,24 @@ public class OnDragPack : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
-        //ParticleSystemRenderer packGlow = GameObject.Find("Cell_02").GetComponent<ParticleSystemRenderer>();
-        //ParticleSystem packGlowParticleSystem = packGlow.gameObject.GetComponent<ParticleSystem>();
-        
-        //packGlow.sortingOrder = 0;
-        //packGlowParticleSystem.Play();
+        transform.SetParent(GameObject.Find("Canvas").transform, false);
+
+        //Whirl11
+        GameObject openingParticles = ObjectPool.Instance.GetObjectForType("Whirl_04", true);
+        openingParticles.transform.position = new Vector3(2.30f, -0.46f, 0);
 
         yield return new WaitForSeconds(0.5f);
-
-        //packGlow.sortingOrder = -1;
-        //packGlowParticleSystem.Pause();
 
         if (OnOpenPack != null)
         {
             OnOpenPack(_packExpansion);
         }
 
-        //ForkParticleEffect explosionEffect = GameObject.Find("Stylized_Space_Explosion").GetComponent<ForkParticleEffect>();
-        //RestartEffect();
-        //explosionEffect.PlayEffect();
+        ObjectPool.Instance.PoolObject(openingParticles);
+
+        //Star_Burst_02
+        openingParticles = ObjectPool.Instance.GetObjectForType("Star_Burst_02", true);
+        openingParticles.transform.position = new Vector3(2.46f, -0.46f, 0);
 
         _eventSystem.SetActive(true);
 
@@ -138,6 +149,7 @@ public class OnDragPack : MonoBehaviour
         _animator.enabled = false;
         _isOpeningPack = false;
         _rectTransform.sizeDelta = new Vector2(_startWidth, _startHeight);
+        
         ObjectPool.Instance.PoolObject(gameObject);
     }
 

@@ -7,7 +7,7 @@ public class SetCardBacks : MonoBehaviour
 {
     //A list of all cardback images.
     [SerializeField]
-    private List<Image> _cardBackImages;
+    public List<Image> _cardBackImages;
 
     /// <summary>
     /// Assigns sprites of all cardbacks to images.

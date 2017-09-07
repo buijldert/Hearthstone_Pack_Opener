@@ -7,19 +7,25 @@ public class DestroyParticlesOverDuration : MonoBehaviour
     [SerializeField]
     private ParticleSystem _particleSystem;
 
-    private void Start()
+    [SerializeField]
+    private float _destroyDelay;
+
+    private float _waitingTime;
+
+    private void OnEnable()
     {
-        
-        StartCoroutine(DestroyOverCount());
+        if (_destroyDelay > 0)
+            _waitingTime = _destroyDelay;
+        else
+            _waitingTime = _particleSystem.main.duration;
+
+        StartCoroutine(DestroyOverTime());
     }
 
-    private IEnumerator DestroyOverCount()
+    private IEnumerator DestroyOverTime()
     {
-        yield return new WaitForSeconds(_particleSystem.main.duration);
-        //if(ObjectPool.Instance.GetObjectForType(gameObject.name, true) != null)
-        //{
-
-        //}
-        Destroy(gameObject);
+        yield return new WaitForSeconds(_waitingTime);
+        ObjectPool.Instance.PoolObject(gameObject);
+        //Destroy(gameObject);
     }
 }

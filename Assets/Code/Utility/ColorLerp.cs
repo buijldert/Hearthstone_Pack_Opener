@@ -9,12 +9,25 @@ public class ColorLerp : MonoBehaviour
     [SerializeField]
     private Image _imageToLerp;
 
+    [SerializeField]
+    private bool _startsLerping;
+
     private Color lerpedColor = Color.white;
 
-    private Color32 startColor = new Color32(66, 134, 244, 75);
-    private Color32 endColor = new Color32(10, 57, 132, 75);
+    [SerializeField]
+    public Color32 startColor = new Color32(66, 134, 244, 75);
+    [SerializeField]
+    public Color32 endColor = new Color32(10, 57, 132, 75);
 
     private Coroutine _lerpColorCoroutine;
+
+    private void Start()
+    {
+        if(_startsLerping)
+        {
+            StartCoroutine(LerpColor());
+        }
+    }
 
     private IEnumerator LerpColor()
     {

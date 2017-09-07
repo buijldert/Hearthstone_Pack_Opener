@@ -1081,8 +1081,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1235765393663090}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 233.5, y: 131.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 233.50002, y: 131.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4044605472922902}
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb103b10f8354b0484ef38697f3856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionRate: 100
+  emissionRate: 3000
   pathWidth: 0.25
 --- !u!114 &114111625706390274
 MonoBehaviour:
@@ -1169,7 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb103b10f8354b0484ef38697f3856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionRate: 100
+  emissionRate: 3000
   pathWidth: 0.25
 --- !u!114 &114209550513794968
 MonoBehaviour:
@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb103b10f8354b0484ef38697f3856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionRate: 100
+  emissionRate: 3000
   pathWidth: 0.25
 --- !u!114 &114414666837401288
 MonoBehaviour:
@@ -1208,7 +1208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb103b10f8354b0484ef38697f3856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionRate: 100
+  emissionRate: 3000
   pathWidth: 0.25
 --- !u!114 &114498802150313782
 MonoBehaviour:
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb103b10f8354b0484ef38697f3856f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emissionRate: 100
+  emissionRate: 3000
   pathWidth: 0.25
 --- !u!114 &114887479901318410
 MonoBehaviour:
@@ -1272,7 +1272,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
@@ -1319,7 +1319,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -79492428
+  randomSeed: -141135961
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1397,7 +1397,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.19999981, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.7411229, g: 0.41149437, b: 0.9485294, a: 0.316}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1703,7 +1703,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -2198,7 +2198,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -4386,7 +4386,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
@@ -4433,7 +4433,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1060196583
+  randomSeed: -1683404688
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4511,7 +4511,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.19999981, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.7411229, g: 0.41149437, b: 0.9485294, a: 0.316}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4817,7 +4817,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -5312,7 +5312,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -7500,7 +7500,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
@@ -7547,7 +7547,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 266731031
+  randomSeed: -1298192233
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -7625,7 +7625,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.19999981, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.7411229, g: 0.41149437, b: 0.9485294, a: 0.316}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -7931,7 +7931,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -8426,7 +8426,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -10614,7 +10614,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
@@ -10661,7 +10661,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1599056451
+  randomSeed: 1671699580
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10739,7 +10739,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.19999981, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.7411229, g: 0.41149437, b: 0.9485294, a: 0.316}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -11045,7 +11045,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -11540,7 +11540,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -13728,7 +13728,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
   startDelay:
@@ -13775,7 +13775,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 712319540
+  randomSeed: -1466130667
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13853,7 +13853,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.19999981, g: 0, b: 1, a: 1}
+      maxColor: {r: 0.7411229, g: 0.41149437, b: 0.9485294, a: 0.316}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14159,7 +14159,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -14654,7 +14654,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -16846,7 +16846,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8059dbe5efb2c8a4aad5f4840306a733, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -16897,7 +16897,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8059dbe5efb2c8a4aad5f4840306a733, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -16948,7 +16948,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8059dbe5efb2c8a4aad5f4840306a733, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -16999,7 +16999,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8059dbe5efb2c8a4aad5f4840306a733, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -17050,7 +17050,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8059dbe5efb2c8a4aad5f4840306a733, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
