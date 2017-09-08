@@ -57,7 +57,7 @@ public class OpenPack : MonoBehaviour {
         for (int i = 0; i < 5; i++)
         {
             DetermineDrop();
-            if(i == 4)
+            if(i == 4 && _currentRarity == Card.Rarity.Common)
             {
                 CommonCheck();
             }
@@ -93,11 +93,11 @@ public class OpenPack : MonoBehaviour {
                 if (_commonCards == 4)
                 {
                     DetermineDrop();
-                    if (_activeCards[i]._cardRarity == Card.Rarity.Common)
+                    if (_currentRarity == Card.Rarity.Common)
                     {
                         _currentSprite = _cardDataArray[(int)_currentExpansion]._rareCards[Random.Range(0, _cardDataArray[(int)_currentExpansion]._rareCards.Count)];
                         _currentAudioClip = _turnOverSounds[1];
-                        _activeCards[i]._cardRarity = Card.Rarity.Rare;
+                        _currentRarity = Card.Rarity.Rare;
                         break;
                     }
                     break;
@@ -111,10 +111,11 @@ public class OpenPack : MonoBehaviour {
 
             else
             {
-                DetermineDrop();
+                //DetermineDrop();
                 break;
             }
         }
+        _commonCards = 0;
     }
 
     private void DetermineDrop()
