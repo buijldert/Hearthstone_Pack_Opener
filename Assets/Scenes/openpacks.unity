@@ -467,7 +467,7 @@ MonoBehaviour:
   _startColor:
     serializedVersion: 2
     rgba: 2701066411
-  _endColor: {r: 0.20000002, g: 0, b: 0.48235297, a: 0}
+  _endColor: {r: 0.20000002, g: 0, b: 0.48235297, a: 0.627451}
 --- !u!114 &216273745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,7 +931,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1772242256
+  randomSeed: -387031948
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4361,8 +4361,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: 680}
-  m_SizeDelta: {x: 190, y: 280}
+  m_AnchoredPosition: {x: 189, y: 947}
+  m_SizeDelta: {x: 415, y: 674}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462338082
 MonoBehaviour:
@@ -4408,7 +4408,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e604dfb1c4b288247974caf5d4c66418, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5324031359f366542b0eefb974fcdd52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4752,9 +4752,9 @@ RectTransform:
   - {fileID: 861800740}
   - {fileID: 464531708}
   - {fileID: 748347224}
+  - {fileID: 1916625099}
   - {fileID: 1547966679}
   - {fileID: 1092850062}
-  - {fileID: 1916625099}
   - {fileID: 462338081}
   - {fileID: 216273742}
   m_Father: {fileID: 0}
@@ -5431,7 +5431,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 593249957}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097563720
 GameObject:
@@ -6074,7 +6074,7 @@ RectTransform:
   m_Children:
   - {fileID: 432077115}
   m_Father: {fileID: 593249957}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.231}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6369,7 +6369,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1815589859}
   - component: {fileID: 1815589858}
-  - component: {fileID: 1815589860}
   m_Layer: 0
   m_Name: OpenPack
   m_TagString: Untagged
@@ -6419,86 +6418,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1815589860
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1815589857}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!1 &1860936054
 GameObject:
   m_ObjectHideFlags: 0
@@ -6618,7 +6537,7 @@ Prefab:
     - target: {fileID: 224542215333516002, guid: 4ad3629390e344d4abaa1f51040d528f,
         type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224542215333516002, guid: 4ad3629390e344d4abaa1f51040d528f,
         type: 2}
