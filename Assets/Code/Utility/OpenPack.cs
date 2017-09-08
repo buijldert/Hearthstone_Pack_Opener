@@ -57,7 +57,6 @@ public class OpenPack : MonoBehaviour {
         for (int i = 0; i < 5; i++)
         {
             DetermineDrop();
-
             if(i == 4)
             {
                 CommonCheck();
@@ -81,11 +80,6 @@ public class OpenPack : MonoBehaviour {
         if (OnCardsDetermined != null)
         {
             OnCardsDetermined();
-        }
-
-        foreach (OnCardClick occ in _activeCards)
-        {
-            occ._cardRarity = Card.Rarity.None;
         }
     }
 
@@ -164,6 +158,7 @@ public class OpenPack : MonoBehaviour {
     {
         foreach(OnCardClick card in _activeCards)
         {
+            card._cardRarity = Card.Rarity.None;
             ObjectPool.Instance.PoolObject(card.gameObject);
         }
         _activeCards.Clear();

@@ -29,6 +29,7 @@ public class OnCardClick : MonoBehaviour
     public delegate void ClickCardAction();
     public static event ClickCardAction OnClickCard;
 
+    private Vector2 _beginPosition;
     public Vector2 _endPosition;
 
     [SerializeField]
@@ -76,24 +77,29 @@ public class OnCardClick : MonoBehaviour
     public void PointerUp()
     {
         isPointerDown = false;
-        CardClick();
+        
+        if (longPressTriggered == false)
+        {
+            CardClick();
+        }
+        else
+        {
+            GameObject.Find("CardGlow").GetComponent<Image>().enabled = false;
+        }
     }
 
     public void CardClick()
     {
-        if(longPressTriggered == false)
-        {
-            _animator.SetBool("isClicked", true);
-        }
-       
+        _animator.SetBool("isClicked", true);
     }
 
     public void CardHold()
     {
         longPressTriggered = true;
-        GameObject.Find("CardGlow").transform.position = transform.position;
-        GameObject.Find("CardGlow").GetComponent<ColorLerp>().startColor = Color.blue;
-        GameObject.Find("CardGlow").GetComponent<ColorLerp>().endColor = Color.cyan;
+        if(_animator.GetBool("isClicked") == false)
+        {
+            GameObject.Find("CardGlow").GetComponent<CardGlow>().ChangeGlow(_cardRarity, transform.position);
+        }
     }
 
     public void SetCardSprite()
