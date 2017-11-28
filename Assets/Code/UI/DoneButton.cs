@@ -8,7 +8,6 @@ public class DoneButton : MonoBehaviour
 
 	public void Done()
     {
-        
         StartCoroutine(ClosePackDelay());
     }
 
@@ -17,6 +16,5 @@ public class DoneButton : MonoBehaviour
         yield return new WaitForEndOfFrame();
         gameObject.SetActive(false);
         _cardsBackground.SetActive(false);
-        
     }
 }

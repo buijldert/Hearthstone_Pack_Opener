@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class OpenPack : MonoBehaviour {
+public class OpenPack : MonoBehaviour
+{
+    public delegate void CardsRemoveAction();
+    public static event CardsRemoveAction OnCardsRemove;
 
     public delegate void CardsDeterminedAction();
     public static event CardsDeterminedAction OnCardsDetermined;
@@ -157,11 +160,14 @@ public class OpenPack : MonoBehaviour {
 
     public void RemoveCards()
     {
-        foreach(OnCardClick card in _activeCards)
-        {
-            card._cardRarity = Card.Rarity.None;
-            ObjectPool.Instance.PoolObject(card.gameObject);
-        }
+        if (OnCardsRemove != null)
+            OnCardsRemove();
+
+        //foreach(OnCardClick card in _activeCards)
+        //{
+        //    card._cardRarity = Card.Rarity.None;
+        //    //ObjectPool.Instance.PoolObject(card.gameObject);
+        //}
         _activeCards.Clear();
     }
 

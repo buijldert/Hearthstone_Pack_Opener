@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class OnCardClick : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class OnCardClick : MonoBehaviour
 
     private float _dropChance = 100f;
     private float _drop;
-    private float _lerpTime = 0.5f;
+    private float _lerpTime = 0.25f;
 
     private int _commonCards = 0;
 
@@ -45,15 +46,27 @@ public class OnCardClick : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(LerpPosition());
+        OpenPack.OnCardsRemove += RemoveCard;
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        StartCoroutine(EnableDelay());
         if (SceneManager.GetActiveScene().name == "openpacks")
         {
             _openPack = GameObject.Find("OpenPack").GetComponent<OpenPack>();
         }
 
         _cardImage.sprite = GameObject.Find("CardBacksDataBase").GetComponent<CardBacksData>()._cardBackSprites[PlayerPrefs.GetInt("CardBackID", 4)];
+    }
+
+    private IEnumerator EnableDelay()
+    {
+        yield return new WaitForEndOfFrame();
+        transform.DOMove(_endPosition, _lerpTime);
+    }
+
+    private void OnDisable()
+    {
+        OpenPack.OnCardsRemove -= RemoveCard;
     }
 
     private void Update()
@@ -114,18 +127,15 @@ public class OnCardClick : MonoBehaviour
         _cardImage.sprite = _currentSprite;
     }
 
-    
-
-    private IEnumerator LerpPosition()
+    private void RemoveCard()
     {
-        float elapsedTime = 0;
+        _cardImage.DOFade(0f, 0.5f).onComplete += PoolCard;
+    }
 
-        while (elapsedTime < _lerpTime)
-        {
-            transform.position = Vector2.Lerp(transform.position, _endPosition, (elapsedTime/_lerpTime));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        transform.position = _endPosition;
+    private void PoolCard()
+    {
+        _cardImage.DOFade(1f, 0f);
+        _cardRarity = Card.Rarity.None;
+        ObjectPool.Instance.PoolObject(gameObject);
     }
 }
